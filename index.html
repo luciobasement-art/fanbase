@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Migue Herrera Fanbase</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background"></div>
+  <div class="scanlines"></div>
+
+  <!-- Pantalla inicial: permite iniciar el audio aunque el navegador bloquee autoplay -->
+  <div id="welcome" class="welcome">
+    <div class="welcome-box">
+      <img src="assets/title.gif" class="title-gif" alt="Migue Herrera Fanbase">
+      <p>⚠️ FANBASE OFICIAL ⚠️</p>
+      <button id="enterBtn">ENTRAR A LA FANBASE</button>
+      <small>subi el volumen papuu</small>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="marquee">★ MIGUE HERRERA FANBASE ★ MIGUE HERRERA FANBASE ★ MIGUE HERRERA FANBASE ★</div>
+    <img src="assets/title.gif" class="title-gif main-title" alt="Migue Herrera Fanbase">
+    <p class="subtitle">Pequeño comienzo de fanbase de la gran Migue Herrera</p>
+  </header>
+
+  <main class="feed">
+
+    <!-- POST 1: EDIT -->
+    <article class="post">
+      <div class="post-head">
+        <div class="avatar">LP</div>
+        <div>
+          <strong>lapulga reformed</strong>
+          <span>@lapulgareformed · ahora</span>
+        </div>
+        <button class="dots">•••</button>
+      </div>
+
+      <div class="caption">
+        <b>q opinan d este edit insano de migue herrera like y suscribios.</b><br>
+        todos los derechos reservados al papu🔥
+      </div>
+
+      <div class="video-wrap">
+        <!-- iJEu8NwmGOQ -->
+        <iframe
+          src="https://www.youtube.com/embed/iJEu8NwmGOQ?origin=https://www.youtube.com"
+          title="Edit de Migue Herrera"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="actions">
+        <button>❤️ <span class="like-count">420</span></button>
+        <button>💬 69</button>
+        <button>↗ compartir</button>
+      </div>
+
+      <section class="comments">
+        <div class="comment"><b>el loco enfermo</b> quien peleaaaaa </div>
+        <div class="comment"><b>chichilo</b> el diablo</div>
+        <div class="comment"><b>frida kahlo</b> esa es mi chica</div>
+        <div class="comment"><b>el calidad</b> mira nomas la belleza de ser adc</div>
+        <div class="comment"><b>veigarciano</b> señorita migue herrera enseñeme porfa</div>
+        <div class="comment"><b>faker</b> 아무것도 두렵지 않지만 이번에는 두렵다는 것을 고백해야합니다...</div>
+      </section>
+
+      <div class="comment-box">
+        <input placeholder="Agregar comentario..." disabled>
+        <button disabled>Publicar</button>
+      </div>
+    </article>
+
+    <!-- POST 2: POLEMICA -->
+    <article class="post controversy">
+      <div class="post-head">
+        <div class="avatar red">ME</div>
+        <div>
+          <strong>migueherrerafanpage</strong>
+          <span>@migueherrerafanpage · 2 h</span>
+        </div>
+        <button class="dots">•••</button>
+      </div>
+
+      <div class="controversy-banner">🚨 NUEVA POLÉMICA 🚨</div>
+
+      <div class="caption">
+        <b>¿QUÉ OPINAN DE LA NUEVA POLÉMICA DE MIGUE HERRERA?</b><br>
+        Abrimos debate en la comunidad. 
+      </div>
+
+      <div class="case-photo">
+        <img src="assets/caso.png" alt="Imagen relacionada con la nueva polémica de Migue Herrera">
+      </div>
+
+      <div class="actions">
+        <button>❤️ <span class="like-count">1337</span></button>
+        <button>💬 128</button>
+        <button>↗ compartir</button>
+      </div>
+
+      <section class="comments">
+        <div class="comment"><b>el loco enfermo</b> me dan ganas de pegarle al dilan</div>
+        <div class="comment"><b>chichilo</b> chichilo va a comprar esa skin</div>
+        <div class="comment"><b>sol1xd</b> <span class="defensa">en mi opinion era justo lo q faltaba para salvar este juego de mrd</span> 🗣️</div>
+        <div class="comment"><b>elsombrita</b> <span class="defensa">LANA REGALAME LA SKIN</span> 🫡</div>
+        <div class="comment"><b>lapulga reformed</b> oh baby doit con esto nos vamos a dunkel</div>
+        <div class="comment"><b>lareini</b> amooo </div>
+        <div class="comment"><b>EL BARTO DESTROY</b> XDDDDDDD</div>
+        <div class="comment"><b>coscu</b> para mi esta bien, respeto maximo para migue hererra</div>
+      </section>
+
+      <div class="comment-box">
+        <input placeholder="Agregar comentario..." disabled>
+        <button disabled>Publicar</button>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Reproductor -->
+  <div class="music-player">
+    <div class="disc" id="disc">💿</div>
+    <div class="track-info">
+      <b>Migue Herrera Anthem</b>
+      <span>sonido oficial de la fanbase</span>
+    </div>
+    <audio id="audio" loop>
+      <!-- Poné tu canción en assets/song.mp3 -->
+      <source src="assets/song.mp3" type="audio/mpeg">
+    </audio>
+    <button id="playBtn" title="Reproducir / pausar">▶</button>
+    <div class="equalizer"><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+
+  <!-- GIFs decorativos: poné tus archivos en assets/gifs/ y agregalos acá -->
+  <img class="floating-gif gif1" src="assets/gifs/gif1.gif" alt="">
+  <img class="floating-gif gif2" src="assets/gifs/gif2.gif" alt="">
+  <img class="floating-gif gif3" src="assets/gifs/gif3.gif" alt="">
+  <img class="floating-gif gif4" src="assets/gifs/gif4.gif" alt="">
+
+  <footer>
+    MIGUE HERRERA FANBASE · mantenganse al tanto de las proximas actualizaciones!
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
