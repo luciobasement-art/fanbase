@@ -1,108 +1,181 @@
-const welcome = document.getElementById("welcome");
-const enterBtn = document.getElementById("enterBtn");
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const player = document.querySelector(".music-player");
-
-async function playMusic() {
-  try {
-    await audio.play();
-    playBtn.textContent = "❚❚";
-    player.classList.add("playing");
-  } catch (e) {
-    playBtn.textContent = "▶";
-  }
-}
-
-enterBtn.addEventListener("click", async () => {
-  welcome.style.display = "none";
-  await playMusic();
-});
-
-playBtn.addEventListener("click", async () => {
-  if (audio.paused) {
-    await playMusic();
-  } else {
-    audio.pause();
-    playBtn.textContent = "▶";
-    player.classList.remove("playing");
-  }
-});
-
-// Si no hay audio todavía, el botón sigue funcionando sin romper la página.
-audio.addEventListener("error", () => {
-  playBtn.title = "Agregá assets/song.mp3 para activar la música";
-});
+// =====================================================
+// MIGUE HERRERA FANBASE
+// REPRODUCTOR + POST-ITS
+// =====================================================
 
 
 // =====================================================
-// SISTEMA DE NOTAS POST-IT
+// REPRODUCTOR
+// =====================================================
+
+const welcome =
+  document.getElementById("welcome");
+
+const enterBtn =
+  document.getElementById("enterBtn");
+
+const audio =
+  document.getElementById("audio");
+
+const playBtn =
+  document.getElementById("playBtn");
+
+const player =
+  document.querySelector(".music-player");
+
+
+// =====================================================
+// REPRODUCIR
+// =====================================================
+
+async function playMusic() {
+
+  try {
+
+    await audio.play();
+
+    playBtn.textContent =
+      "❚❚";
+
+    player.classList.add(
+      "playing"
+    );
+
+  } catch (error) {
+
+    playBtn.textContent =
+      "▶";
+
+  }
+
+}
+
+
+// =====================================================
+// ENTRAR
+// =====================================================
+
+enterBtn.addEventListener(
+  "click",
+  async () => {
+
+    welcome.style.display =
+      "none";
+
+    await playMusic();
+
+  }
+);
+
+
+// =====================================================
+// PLAY / PAUSE
+// =====================================================
+
+playBtn.addEventListener(
+  "click",
+  async () => {
+
+    if (audio.paused) {
+
+      await playMusic();
+
+    } else {
+
+      audio.pause();
+
+      playBtn.textContent =
+        "▶";
+
+      player.classList.remove(
+        "playing"
+      );
+
+    }
+
+  }
+);
+
+
+// =====================================================
+// ERROR AUDIO
+// =====================================================
+
+audio.addEventListener(
+  "error",
+  () => {
+
+    playBtn.title =
+      "No se encontró assets/song.mp3";
+
+  }
+);
+
+
+
+// =====================================================
+// POST-ITS
 // =====================================================
 
 const addNoteBtn =
-  document.getElementById("addNoteBtn");
+  document.getElementById(
+    "addNoteBtn"
+  );
 
 const notesContainer =
-  document.getElementById("notesContainer");
+  document.getElementById(
+    "notesContainer"
+  );
 
+const toggleNotesBtn =
+  document.getElementById(
+    "toggleNotesBtn"
+  );
 
-// Crear modal
-
-const modal =
-  document.createElement("div");
-
-modal.className =
-  "note-modal";
-
-modal.innerHTML = `
-  <div class="note-modal-content">
-
-    <h2>✍️ Nueva Nota</h2>
-
-    <label>Tu Nombre:</label>
-
-    <input
-      type="text"
-      id="noteName"
-      placeholder="ej: lucio, papu, etc"
-    >
-
-    <label>Tu Nota:</label>
-
-    <textarea
-      id="noteText"
-      placeholder="Escribe lo que quieras..."
-    ></textarea>
-
-    <div class="note-modal-buttons">
-
-      <button class="cancel-note">
-        Cancelar
-      </button>
-
-      <button class="save-note">
-        Guardar
-      </button>
-
-    </div>
-
-  </div>
-`;
-
-document.body.appendChild(modal);
+const notesSidebar =
+  document.getElementById(
+    "notesSidebar"
+  );
 
 
 const noteNameInput =
-  document.getElementById("noteName");
+  document.getElementById(
+    "noteName"
+  );
 
 const noteTextInput =
-  document.getElementById("noteText");
+  document.getElementById(
+    "noteText"
+  );
 
-const saveNoteBtn =
-  modal.querySelector(".save-note");
 
-const cancelNoteBtn =
-  modal.querySelector(".cancel-note");
+const STORAGE_KEY =
+  "migueNotes";
+
+
+
+// =====================================================
+// OBTENER NOTAS
+// =====================================================
+
+function getNotes() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        STORAGE_KEY
+      ) || "[]"
+    );
+
+  } catch (error) {
+
+    return [];
+
+  }
+
+}
+
 
 
 // =====================================================
@@ -112,11 +185,11 @@ const cancelNoteBtn =
 function loadNotes() {
 
   const notes =
-    JSON.parse(
-      localStorage.getItem("migueNotes") || "[]"
-    );
+    getNotes();
 
-  notesContainer.innerHTML = "";
+
+  notesContainer.innerHTML =
+    "";
 
 
   notes.forEach(
@@ -134,8 +207,9 @@ function loadNotes() {
 }
 
 
+
 // =====================================================
-// CREAR NOTA
+// CREAR POST-IT
 // =====================================================
 
 function createNoteElement(
@@ -144,53 +218,92 @@ function createNoteElement(
   index
 ) {
 
-  const noteEl =
-    document.createElement("div");
+  const note =
+    document.createElement(
+      "div"
+    );
 
-  noteEl.className =
+  note.className =
     "sticky-note";
 
 
-  noteEl.innerHTML = `
+  // NOMBRE
 
-    <button
-      class="sticky-note-delete"
-      data-index="${index}"
-      type="button"
-    >
-      ✕
-    </button>
-
-    <div class="sticky-note-name">
-      ${name || "Anónimo"}
-    </div>
-
-    <div class="sticky-note-text">
-      ${text}
-    </div>
-
-  `;
-
-
-  noteEl
-    .querySelector(
-      ".sticky-note-delete"
-    )
-    .addEventListener(
-      "click",
-      () => {
-
-        deleteNote(index);
-
-      }
+  const nameElement =
+    document.createElement(
+      "div"
     );
+
+  nameElement.className =
+    "sticky-note-name";
+
+  nameElement.textContent =
+    name || "Anónimo";
+
+
+  // TEXTO
+
+  const textElement =
+    document.createElement(
+      "div"
+    );
+
+  textElement.className =
+    "sticky-note-text";
+
+  textElement.textContent =
+    text;
+
+
+  // BOTON X
+
+  const deleteButton =
+    document.createElement(
+      "button"
+    );
+
+  deleteButton.className =
+    "sticky-note-delete";
+
+  deleteButton.type =
+    "button";
+
+  deleteButton.textContent =
+    "✕";
+
+  deleteButton.title =
+    "Borrar nota";
+
+
+  deleteButton.addEventListener(
+    "click",
+    () => {
+
+      deleteNote(index);
+
+    }
+  );
+
+
+  note.appendChild(
+    deleteButton
+  );
+
+  note.appendChild(
+    nameElement
+  );
+
+  note.appendChild(
+    textElement
+  );
 
 
   notesContainer.appendChild(
-    noteEl
+    note
   );
 
 }
+
 
 
 // =====================================================
@@ -200,8 +313,8 @@ function createNoteElement(
 function saveNote() {
 
   const name =
-    noteNameInput.value.trim() ||
-    "Anónimo";
+    noteNameInput.value.trim();
+
 
   const text =
     noteTextInput.value.trim();
@@ -210,8 +323,10 @@ function saveNote() {
   if (!text) {
 
     alert(
-      "Escribí algo en la nota, boludo! 😤"
+      "Escribí algo en la nota 😤"
     );
+
+    noteTextInput.focus();
 
     return;
 
@@ -219,40 +334,51 @@ function saveNote() {
 
 
   const notes =
-    JSON.parse(
-      localStorage.getItem("migueNotes") || "[]"
-    );
+    getNotes();
 
 
   notes.push({
-    name: name,
-    text: text
+
+    name:
+      name || "Anónimo",
+
+    text:
+      text
+
   });
 
 
   localStorage.setItem(
-    "migueNotes",
+    STORAGE_KEY,
     JSON.stringify(notes)
   );
 
 
   loadNotes();
 
-  closeModal();
+
+  noteNameInput.value =
+    "";
+
+  noteTextInput.value =
+    "";
+
+
+
+  noteTextInput.focus();
 
 }
 
 
+
 // =====================================================
-// ELIMINAR NOTA
+// BORRAR NOTA
 // =====================================================
 
 function deleteNote(index) {
 
   const notes =
-    JSON.parse(
-      localStorage.getItem("migueNotes") || "[]"
-    );
+    getNotes();
 
 
   notes.splice(
@@ -262,7 +388,7 @@ function deleteNote(index) {
 
 
   localStorage.setItem(
-    "migueNotes",
+    STORAGE_KEY,
     JSON.stringify(notes)
   );
 
@@ -272,73 +398,50 @@ function deleteNote(index) {
 }
 
 
-// =====================================================
-// ABRIR MODAL
-// =====================================================
-
-function openModal() {
-
-  modal.classList.add(
-    "active"
-  );
-
-  noteNameInput.focus();
-
-}
-
 
 // =====================================================
-// CERRAR MODAL
-// =====================================================
-
-function closeModal() {
-
-  modal.classList.remove(
-    "active"
-  );
-
-  noteNameInput.value =
-    "";
-
-  noteTextInput.value =
-    "";
-
-}
-
-
-// =====================================================
-// EVENTOS
+// PEGAR NOTITA
 // =====================================================
 
 addNoteBtn.addEventListener(
-  "click",
-  openModal
-);
-
-
-saveNoteBtn.addEventListener(
   "click",
   saveNote
 );
 
 
-cancelNoteBtn.addEventListener(
+
+// =====================================================
+// OCULTAR NOTAS
+// =====================================================
+
+toggleNotesBtn.addEventListener(
   "click",
-  closeModal
-);
+  () => {
 
+    notesSidebar.classList.toggle(
+      "notes-hidden"
+    );
 
-// Cerrar al hacer click afuera
-
-modal.addEventListener(
-  "click",
-  (e) => {
 
     if (
-      e.target === modal
+      notesSidebar.classList.contains(
+        "notes-hidden"
+      )
     ) {
 
-      closeModal();
+      toggleNotesBtn.textContent =
+        "+";
+
+      toggleNotesBtn.title =
+        "Mostrar notas";
+
+    } else {
+
+      toggleNotesBtn.textContent =
+        "−";
+
+      toggleNotesBtn.title =
+        "Ocultar notas";
 
     }
 
@@ -346,15 +449,18 @@ modal.addEventListener(
 );
 
 
-// Ctrl + Enter para guardar
+
+// =====================================================
+// CTRL + ENTER PARA PUBLICAR
+// =====================================================
 
 noteTextInput.addEventListener(
   "keydown",
-  (e) => {
+  (event) => {
 
     if (
-      e.ctrlKey &&
-      e.key === "Enter"
+      event.ctrlKey &&
+      event.key === "Enter"
     ) {
 
       saveNote();
@@ -365,8 +471,9 @@ noteTextInput.addEventListener(
 );
 
 
+
 // =====================================================
-// CARGAR NOTAS AL INICIAR
+// CARGAR NOTAS AL ABRIR
 // =====================================================
 
 loadNotes();
