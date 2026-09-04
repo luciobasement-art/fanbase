@@ -4,70 +4,237 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Migue Herrera Fanbase</title>
-  <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="stylesheet" href="style.css">
+
   <style>
-    /* POST DE CAMPEONES / MOBAFIRE */
-    .champions-post { border-color: rgba(255, 55, 200, .8); }
-    .champions-header { text-align: center; padding: 10px 0 18px; }
-    .champions-kicker {
-      display: inline-block; color: #09020b; background: #ff37c8;
-      padding: 6px 10px; font-size: 11px; font-weight: 1000;
-      letter-spacing: 2px; box-shadow: 3px 3px 0 #34f5ff;
-    }
-    .champions-header h2 {
-      margin: 17px 0 6px; font-size: clamp(23px, 6vw, 35px);
-      text-shadow: 0 0 12px rgba(255,55,200,.55);
-    }
-    .champions-header p { color: #b9a8c0; font-size: 13px; line-height: 1.5; }
-    .champion-grid {
-      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;
-    }
-    .champion-card {
-      display: block; padding: 14px; text-decoration: none; color: white;
-      background: linear-gradient(145deg, rgba(255,55,200,.14), rgba(52,245,255,.06));
-      border: 1px solid rgba(255,55,200,.48);
-      transition: transform .15s, border-color .15s, box-shadow .15s;
-    }
-    .champion-card:hover {
-      transform: translateY(-3px); border-color: #34f5ff;
-      box-shadow: 0 0 17px rgba(255,55,200,.28);
-    }
-    .champion-card strong {
-      display: block; color: #ff8cdf; font-size: 20px; margin-bottom: 4px;
-    }
-    .champion-card > span {
-      display: block; color: #9f91a7; font-size: 11px; margin-bottom: 10px;
-    }
-    .champion-card small {
-      display: block; font-size: 10px; line-height: 1.45;
-      color: #c9bdcf; margin-top: 5px;
-    }
-    .champion-card small b { color: #34f5ff; }
-    .champion-card em {
-      display: block; margin-top: 11px; padding: 7px 8px; text-align: center;
-      background: #ff37c8; color: #120612; font-size: 10px;
-      font-weight: 1000; font-style: normal; letter-spacing: 1px;
-    }
-    .champions-footer {
-      margin-top: 13px; padding: 9px; text-align: center;
-      border: 1px dashed rgba(52,245,255,.45); color: #9fecef; font-size: 9px;
-    }
-    @media (max-width: 560px) {
-      .champion-grid { grid-template-columns: 1fr; }
-    }
-  
-    .champion-card small {
-      color: #ffb7e8;
-      line-height: 1.5;
-    }
-    .champion-card .matchup-win,
-    .champion-card .matchup-loss {
-      color: #ff8cdf;
-      font-weight: 1000;
+    /* === FANBASE RADIO: neon rosa / negro / cyan === */
+    .mh-radio {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: min(690px, calc(100vw - 24px));
+      padding: 12px 14px;
+      border: 1px solid rgba(255,55,200,.78);
+      background: rgba(10,5,12,.96);
+      box-shadow: 0 0 24px rgba(255,55,200,.20), 4px 4px 0 rgba(52,245,255,.20);
+      backdrop-filter: blur(12px);
     }
 
+    .radio-head {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .mh-radio .disc {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,55,200,.8);
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff8cdf 0 8%, #170b18 9% 30%, #ff37c8 31% 34%, #100810 35%);
+      font-size: 20px;
+    }
+
+    .mh-radio.playing .disc {
+      animation: mhRadioSpin 2.5s linear infinite;
+    }
+
+    @keyframes mhRadioSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .mh-radio .track-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .mh-radio .track-info b {
+      display: block;
+      color: #ff8cdf;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mh-radio .track-info span {
+      display: block;
+      margin-top: 3px;
+      color: #9f91a7;
+      font-size: 9px;
+      letter-spacing: .5px;
+    }
+
+    .radio-menu,
+    .radio-controls button {
+      border: 1px solid rgba(255,55,200,.42);
+      background: #160b16;
+      color: #ff8cdf;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .radio-menu {
+      width: 34px;
+      height: 30px;
+      font-size: 14px;
+    }
+
+    .radio-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 9px 0 5px;
+      color: #8d7d94;
+      font-size: 9px;
+    }
+
+    #progressBar {
+      flex: 1;
+      accent-color: #ff37c8;
+    }
+
+    .radio-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .radio-controls button {
+      min-width: 32px;
+      height: 30px;
+    }
+
+    .radio-controls button:hover,
+    .radio-menu:hover {
+      border-color: #34f5ff;
+      color: #34f5ff;
+    }
+
+    .radio-controls .play-main {
+      width: 38px;
+      background: #ff37c8;
+      border-color: #ff37c8;
+      color: #100510;
+      box-shadow: 3px 3px 0 #34f5ff;
+    }
+
+    .spotify-switch {
+      margin-left: auto;
+      padding: 0 11px;
+      letter-spacing: .5px;
+    }
+
+    #volumeBar {
+      width: 68px;
+      accent-color: #ff37c8;
+    }
+
+    .radio-playlist,
+    .spotify-panel {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,55,200,.20);
+    }
+
+    .radio-playlist.open,
+    .spotify-panel.open {
+      display: block;
+    }
+
+    .radio-label {
+      margin-bottom: 7px;
+      color: #ff8cdf;
+      font-size: 9px;
+      font-weight: 1000;
+      letter-spacing: 1.5px;
+    }
+
+    .song {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 25px 1fr auto;
+      align-items: center;
+      gap: 7px;
+      margin: 3px 0;
+      padding: 8px;
+      text-align: left;
+      border: 1px solid transparent;
+      background: rgba(255,55,200,.04);
+      color: #c9bdcf;
+      cursor: pointer;
+    }
+
+    .song:hover,
+    .song.active {
+      border-color: rgba(255,55,200,.60);
+      background: rgba(255,55,200,.12);
+    }
+
+    .song > span {
+      color: #806f86;
+      font-size: 9px;
+    }
+
+    .song b {
+      color: #fff;
+      font-size: 10px;
+    }
+
+    .song i {
+      color: #ff8cdf;
+      font-size: 8px;
+      font-style: normal;
+    }
+
+    .radio-help {
+      margin: 7px 2px 0;
+      color: #75677b;
+      font-size: 9px;
+    }
+
+    .radio-help code {
+      color: #34f5ff;
+    }
+
+    .spotify-panel iframe {
+      display: block;
+      width: 100%;
+      border-radius: 7px;
+    }
+
+    .back-local {
+      margin-top: 7px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #ff8cdf;
+      cursor: pointer;
+      font-size: 9px;
+    }
+
+    @media (max-width: 560px) {
+      .mh-radio {
+        bottom: 7px;
+        width: calc(100vw - 14px);
+      }
+
+      .spotify-switch {
+        margin-left: 0;
+      }
+
+      #volumeBar {
+        width: 52px;
+      }
+    }
   </style>
+
 </head>
 <body>
   <div class="background"></div>
@@ -153,7 +320,7 @@
 
       <div class="caption">
         <b>¿QUÉ OPINAN DE LA NUEVA POLÉMICA DE MIGUE HERRERA?</b><br>
-        Abrimos debate en la comunidad.
+        Abrimos debate en la comunidad. 
       </div>
 
       <div class="case-photo">
@@ -183,141 +350,71 @@
       </div>
     </article>
 
-    <!-- POST 3: CAMPEONES / BUILDS -->
-    <article class="post champions-post">
-      <div class="post-head">
-        <div class="avatar">MH</div>
-        <div>
-          <strong>migueherrerafanpage</strong>
-          <span>@migueherrerafanpage · guía de builds</span>
-        </div>
-        <button class="dots">•••</button>
-      </div>
-
-      <div class="champions-header">
-        <div class="champions-kicker">⚔️ LOL BUILDS DATABASE</div>
-        <h2>BUILDS DE MIGUE HERRERA</h2>
-        <p>Esto es una especie de acortador o machete, elegí un campeón y te mandamos directo a su página de MOBAFire para ver las builds.</p>
-      </div>
-
-      <div class="champion-grid">
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/lux-62" target="_blank" rel="noopener noreferrer">
-          <strong>Lux</strong><span>✨ Mago / Support</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Fizz · Zed · Naafiri</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Yone · Yasuo · Akshan</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/poppy-43" target="_blank" rel="noopener noreferrer">
-          <strong>Poppy</strong><span>🛡️ Tanque / Fighter</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Riven · Camille · Irelia</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Lee Sin · Viego · Vi</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/lillia-154" target="_blank" rel="noopener noreferrer">
-          <strong>Lillia</strong><span>🌸 Mago / Fighter</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Kindred · Graves · Lee Sin</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Amumu · Sejuani · Rammus</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/aurora-184" target="_blank" rel="noopener noreferrer">
-          <strong>Aurora</strong><span>🌌 Mago</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Naafiri · Fizz · Katarina</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Akshan · Yasuo · Yone</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/jinx-116" target="_blank" rel="noopener noreferrer">
-          <strong>Jinx</strong><span>🔫 Tirador</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Draven · Samira · Lucian</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Aphelios · Jhin · Sivir</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/sejuani-91" target="_blank" rel="noopener noreferrer">
-          <strong>Sejuani</strong><span>❄️ Tanque / Fighter</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Trundle · Kindred · Graves</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Amumu · Rammus · Rell</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/lulu-95" target="_blank" rel="noopener noreferrer">
-          <strong>Lulu</strong><span>🧚 Support / Mago</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Blitzcrank · Nautilus · Pyke</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Leona · Rakan · Alistar</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/nami-108" target="_blank" rel="noopener noreferrer">
-          <strong>Nami</strong><span>🌊 Support / Mago</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Blitzcrank · Pyke · Nautilus</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Leona · Rell · Alistar</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/teemo-9" target="_blank" rel="noopener noreferrer">
-          <strong>Teemo</strong><span>🍄 Mago / Tirador</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Malphite · Dr. Mundo · Ornn</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Nasus · Darius · Garen</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/kayle-2" target="_blank" rel="noopener noreferrer">
-          <strong>Kayle</strong><span>⚔️ Fighter / Mago</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Tryndamere · Irelia · Jax</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Garen · Nasus · Mordekaiser</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/diana-102" target="_blank" rel="noopener noreferrer">
-          <strong>Diana</strong><span>🌙 Mago / Fighter</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Kindred · Graves · Rek'Sai</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Amumu · Rammus · Rell</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/amumu-23" target="_blank" rel="noopener noreferrer">
-          <strong>Amumu</strong><span>💀 Tanque / Mago</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Kindred · Graves · Bel'Veth</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Rammus · Sejuani · Zac</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-        <a class="champion-card" href="https://www.mobafire.com/league-of-legends/champion/katarina-36" target="_blank" rel="noopener noreferrer">
-          <strong>Katarina</strong><span>🗡️ Mago / Assassin</span>
-          <small><span class="matchup-win">LE GANA A:</span> <b>Galio · Kassadin · Lissandra</b></small>
-          <small><span class="matchup-loss">PIERDE CONTRA:</span> <b>Lux · Brand · Vel'Koz</b></small>
-          <em>VER BUILDS →</em>
-        </a>
-
-      </div>
-
-      <div class="champions-footer">
-        💗 TOCÁ CUALQUIER CAMPEÓN PARA ABRIR SU PÁGINA DE MOBAFIRE
-      </div>
-    </article>
-
   </main>
 
-  <!-- Reproductor -->
-  <div class="music-player">
-    <div class="disc" id="disc">💿</div>
-    <div class="track-info">
-      <b>Migue Herrera Anthem</b>
-      <span>sonido oficial de la fanbase</span>
+  <!-- MIGUE HERRERA RADIO -->
+  <div class="music-player mh-radio" id="mhRadio">
+    <div class="radio-head">
+      <div class="disc" id="disc">💿</div>
+      <div class="track-info">
+        <b id="trackTitle">Migue Herrera Anthem</b>
+        <span id="trackSubtitle">soundtrack oficial · FANBASE RADIO</span>
+      </div>
+      <button class="radio-menu" id="radioMenu" title="Abrir playlist">☰</button>
     </div>
-    <audio id="audio" loop>
-      <!-- Poné tu canción en assets/song.mp3 -->
+
+    <div class="radio-progress">
+      <span id="currentTime">0:00</span>
+      <input id="progressBar" type="range" min="0" max="100" value="0" aria-label="Progreso">
+      <span id="duration">0:00</span>
+    </div>
+
+    <div class="radio-controls">
+      <button id="prevBtn" title="Anterior">⏮</button>
+      <button id="playBtn" class="play-main" title="Reproducir / pausar">▶</button>
+      <button id="nextBtn" title="Siguiente">⏭</button>
+      <button id="spotifyBtn" class="spotify-switch" title="Cambiar a Spotify">♫ SPOTIFY</button>
+      <input id="volumeBar" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volumen">
+    </div>
+
+    <div class="radio-playlist" id="radioPlaylist">
+      <div class="radio-label">★ FANBASE RADIO · LOCAL</div>
+
+      <button class="song active" data-src="assets/song.mp3" data-title="Migue Herrera Anthem">
+        <span>01</span><b>Migue Herrera Anthem</b><i>SOUNDTRACK</i>
+      </button>
+
+      <button class="song" data-src="assets/music/tema2.mp3" data-title="Tema 2">
+        <span>02</span><b>Tema 2</b><i>LOCAL</i>
+      </button>
+
+      <button class="song" data-src="assets/music/tema3.mp3" data-title="Tema 3">
+        <span>03</span><b>Tema 3</b><i>LOCAL</i>
+      </button>
+
+      <p class="radio-help">
+        Poné tus MP3 en <code>assets/music/</code> y cambiá los nombres de los temas.
+      </p>
+    </div>
+
+    <div class="spotify-panel" id="spotifyPanel">
+      <div class="radio-label">♫ MIGUE HERRERA RADIO · SPOTIFY</div>
+      <iframe
+        src="https://open.spotify.com/embed/playlist/0I1NCOodfKp7OxgPtE329c?utm_source=generator&theme=0"
+        width="100%"
+        height="152"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+      <button class="back-local" id="backLocal">← VOLVER AL SOUNDTRACK</button>
+    </div>
+
+    <audio id="audio" preload="metadata">
       <source src="assets/song.mp3" type="audio/mpeg">
     </audio>
-    <button id="playBtn" title="Reproducir / pausar">▶</button>
-    <div class="equalizer"><i></i><i></i><i></i><i></i><i></i></div>
   </div>
-
-  <!-- GIFs decorativos: poné tus archivos en assets/gifs/ y agregalos acá -->
+<!-- GIFs decorativos: poné tus archivos en assets/gifs/ y agregalos acá -->
   <img class="floating-gif gif1" src="assets/gifs/gif1.gif" alt="">
   <img class="floating-gif gif2" src="assets/gifs/gif2.gif" alt="">
   <img class="floating-gif gif3" src="assets/gifs/gif3.gif" alt="">
@@ -326,6 +423,125 @@
   <footer>
     MIGUE HERRERA FANBASE · mantenganse al tanto de las proximas actualizaciones!
   </footer>
+
+  
+  <script>
+    (() => {
+      const audio = document.getElementById('audio');
+      const radio = document.getElementById('mhRadio');
+      const play = document.getElementById('playBtn');
+      const prev = document.getElementById('prevBtn');
+      const next = document.getElementById('nextBtn');
+      const volume = document.getElementById('volumeBar');
+      const progress = document.getElementById('progressBar');
+      const current = document.getElementById('currentTime');
+      const duration = document.getElementById('duration');
+      const title = document.getElementById('trackTitle');
+      const subtitle = document.getElementById('trackSubtitle');
+      const menu = document.getElementById('radioMenu');
+      const list = document.getElementById('radioPlaylist');
+      const spotifyBtn = document.getElementById('spotifyBtn');
+      const spotifyPanel = document.getElementById('spotifyPanel');
+      const backLocal = document.getElementById('backLocal');
+      const songs = [...document.querySelectorAll('.mh-radio .song')];
+      let currentSong = 0;
+
+      const fmt = (seconds) => {
+        if (!Number.isFinite(seconds)) return '0:00';
+        return Math.floor(seconds / 60) + ':' + String(Math.floor(seconds % 60)).padStart(2, '0');
+      };
+
+      function loadSong(index, autoplay = false) {
+        currentSong = (index + songs.length) % songs.length;
+        const item = songs[currentSong];
+
+        songs.forEach((song, i) => {
+          song.classList.toggle('active', i === currentSong);
+        });
+
+        audio.src = item.dataset.src;
+        audio.load();
+        title.textContent = item.dataset.title;
+        subtitle.textContent = currentSong === 0
+          ? 'soundtrack oficial · FANBASE RADIO'
+          : 'playlist local · FANBASE RADIO';
+
+        if (autoplay) audio.play().catch(() => {});
+      }
+
+      play.addEventListener('click', () => {
+        if (audio.paused) audio.play().catch(() => {});
+        else audio.pause();
+      });
+
+      prev.addEventListener('click', () => loadSong(currentSong - 1, true));
+      next.addEventListener('click', () => loadSong(currentSong + 1, true));
+
+      songs.forEach((song, index) => {
+        song.addEventListener('click', () => loadSong(index, true));
+      });
+
+      volume.addEventListener('input', () => {
+        audio.volume = Number(volume.value);
+      });
+
+      progress.addEventListener('input', () => {
+        if (audio.duration) {
+          audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+        }
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        current.textContent = fmt(audio.currentTime);
+        progress.value = audio.duration
+          ? (audio.currentTime / audio.duration) * 100
+          : 0;
+      });
+
+      audio.addEventListener('loadedmetadata', () => {
+        duration.textContent = fmt(audio.duration);
+      });
+
+      audio.addEventListener('play', () => {
+        play.textContent = '⏸';
+        radio.classList.add('playing');
+      });
+
+      audio.addEventListener('pause', () => {
+        play.textContent = '▶';
+        radio.classList.remove('playing');
+      });
+
+      audio.addEventListener('ended', () => loadSong(currentSong + 1, true));
+
+      menu.addEventListener('click', () => {
+        list.classList.toggle('open');
+        spotifyPanel.classList.remove('open');
+      });
+
+      spotifyBtn.addEventListener('click', () => {
+        spotifyPanel.classList.add('open');
+        list.classList.remove('open');
+      });
+
+      backLocal.addEventListener('click', () => {
+        spotifyPanel.classList.remove('open');
+        list.classList.add('open');
+      });
+
+      /* Al entrar a la fanbase, intentamos arrancar el soundtrack.
+         El navegador puede bloquear autoplay; el botón ▶ siempre lo permite. */
+      const enter = document.getElementById('enterBtn');
+      if (enter) {
+        enter.addEventListener('click', () => {
+          audio.play().catch(() => {});
+        });
+      }
+
+      audio.volume = 0.75;
+      loadSong(0, false);
+    })();
+  </script>
 
   <script src="script.js"></script>
 </body>
