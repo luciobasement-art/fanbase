@@ -1,49 +1,372 @@
-document.addEventListener("DOMContentLoaded", () => {
+const welcome = document.getElementById("welcome");
+const enterBtn = document.getElementById("enterBtn");
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const player = document.querySelector(".music-player");
 
-  // =========================
-  // REPRODUCTOR DE MÚSICA
-  // =========================
-
-  const audio = document.getElementById("audio");
-  const playButton = document.getElementById("playButton");
-
-  if (audio && playButton) {
-
-    playButton.addEventListener("click", () => {
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    });
-
-    audio.addEventListener("play", () => {
-      playButton.textContent = "⏸";
-    });
-
-    audio.addEventListener("pause", () => {
-      playButton.textContent = "▶";
-    });
-
+async function playMusic() {
+  try {
+    await audio.play();
+    playBtn.textContent = "❚❚";
+    player.classList.add("playing");
+  } catch (e) {
+    playBtn.textContent = "▶";
   }
+}
 
-
-  // =========================
-  // BOTÓN DE ENTRAR
-  // =========================
-
-  const enterButton = document.getElementById("enterBtn");
-
-  if (enterButton) {
-    enterButton.addEventListener("click", () => {
-
-      const audio = document.getElementById("audio");
-
-      if (audio) {
-        audio.play().catch(() => {});
-      }
-
-    });
-  }
-
+enterBtn.addEventListener("click", async () => {
+  welcome.style.display = "none";
+  await playMusic();
 });
+
+playBtn.addEventListener("click", async () => {
+  if (audio.paused) {
+    await playMusic();
+  } else {
+    audio.pause();
+    playBtn.textContent = "▶";
+    player.classList.remove("playing");
+  }
+});
+
+// Si no hay audio todavía, el botón sigue funcionando sin romper la página.
+audio.addEventListener("error", () => {
+  playBtn.title = "Agregá assets/song.mp3 para activar la música";
+});
+
+
+// =====================================================
+// SISTEMA DE NOTAS POST-IT
+// =====================================================
+
+const addNoteBtn =
+  document.getElementById("addNoteBtn");
+
+const notesContainer =
+  document.getElementById("notesContainer");
+
+
+// Crear modal
+
+const modal =
+  document.createElement("div");
+
+modal.className =
+  "note-modal";
+
+modal.innerHTML = `
+  <div class="note-modal-content">
+
+    <h2>✍️ Nueva Nota</h2>
+
+    <label>Tu Nombre:</label>
+
+    <input
+      type="text"
+      id="noteName"
+      placeholder="ej: lucio, papu, etc"
+    >
+
+    <label>Tu Nota:</label>
+
+    <textarea
+      id="noteText"
+      placeholder="Escribe lo que quieras..."
+    ></textarea>
+
+    <div class="note-modal-buttons">
+
+      <button class="cancel-note">
+        Cancelar
+      </button>
+
+      <button class="save-note">
+        Guardar
+      </button>
+
+    </div>
+
+  </div>
+`;
+
+document.body.appendChild(modal);
+
+
+const noteNameInput =
+  document.getElementById("noteName");
+
+const noteTextInput =
+  document.getElementById("noteText");
+
+const saveNoteBtn =
+  modal.querySelector(".save-note");
+
+const cancelNoteBtn =
+  modal.querySelector(".cancel-note");
+
+
+// =====================================================
+// CARGAR NOTAS
+// =====================================================
+
+function loadNotes() {
+
+  const notes =
+    JSON.parse(
+      localStorage.getItem("migueNotes") || "[]"
+    );
+
+  notesContainer.innerHTML = "";
+
+
+  notes.forEach(
+    (note, index) => {
+
+      createNoteElement(
+        note.name,
+        note.text,
+        index
+      );
+
+    }
+  );
+
+}
+
+
+// =====================================================
+// CREAR NOTA
+// =====================================================
+
+function createNoteElement(
+  name,
+  text,
+  index
+) {
+
+  const noteEl =
+    document.createElement("div");
+
+  noteEl.className =
+    "sticky-note";
+
+
+  noteEl.innerHTML = `
+
+    <button
+      class="sticky-note-delete"
+      data-index="${index}"
+      type="button"
+    >
+      ✕
+    </button>
+
+    <div class="sticky-note-name">
+      ${name || "Anónimo"}
+    </div>
+
+    <div class="sticky-note-text">
+      ${text}
+    </div>
+
+  `;
+
+
+  noteEl
+    .querySelector(
+      ".sticky-note-delete"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        deleteNote(index);
+
+      }
+    );
+
+
+  notesContainer.appendChild(
+    noteEl
+  );
+
+}
+
+
+// =====================================================
+// GUARDAR NOTA
+// =====================================================
+
+function saveNote() {
+
+  const name =
+    noteNameInput.value.trim() ||
+    "Anónimo";
+
+  const text =
+    noteTextInput.value.trim();
+
+
+  if (!text) {
+
+    alert(
+      "Escribí algo en la nota, boludo! 😤"
+    );
+
+    return;
+
+  }
+
+
+  const notes =
+    JSON.parse(
+      localStorage.getItem("migueNotes") || "[]"
+    );
+
+
+  notes.push({
+    name: name,
+    text: text
+  });
+
+
+  localStorage.setItem(
+    "migueNotes",
+    JSON.stringify(notes)
+  );
+
+
+  loadNotes();
+
+  closeModal();
+
+}
+
+
+// =====================================================
+// ELIMINAR NOTA
+// =====================================================
+
+function deleteNote(index) {
+
+  const notes =
+    JSON.parse(
+      localStorage.getItem("migueNotes") || "[]"
+    );
+
+
+  notes.splice(
+    index,
+    1
+  );
+
+
+  localStorage.setItem(
+    "migueNotes",
+    JSON.stringify(notes)
+  );
+
+
+  loadNotes();
+
+}
+
+
+// =====================================================
+// ABRIR MODAL
+// =====================================================
+
+function openModal() {
+
+  modal.classList.add(
+    "active"
+  );
+
+  noteNameInput.focus();
+
+}
+
+
+// =====================================================
+// CERRAR MODAL
+// =====================================================
+
+function closeModal() {
+
+  modal.classList.remove(
+    "active"
+  );
+
+  noteNameInput.value =
+    "";
+
+  noteTextInput.value =
+    "";
+
+}
+
+
+// =====================================================
+// EVENTOS
+// =====================================================
+
+addNoteBtn.addEventListener(
+  "click",
+  openModal
+);
+
+
+saveNoteBtn.addEventListener(
+  "click",
+  saveNote
+);
+
+
+cancelNoteBtn.addEventListener(
+  "click",
+  closeModal
+);
+
+
+// Cerrar al hacer click afuera
+
+modal.addEventListener(
+  "click",
+  (e) => {
+
+    if (
+      e.target === modal
+    ) {
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+// Ctrl + Enter para guardar
+
+noteTextInput.addEventListener(
+  "keydown",
+  (e) => {
+
+    if (
+      e.ctrlKey &&
+      e.key === "Enter"
+    ) {
+
+      saveNote();
+
+    }
+
+  }
+);
+
+
+// =====================================================
+// CARGAR NOTAS AL INICIAR
+// =====================================================
+
+loadNotes();
