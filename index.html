@@ -5,236 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Migue Herrera Fanbase</title>
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* === FANBASE RADIO: neon rosa / negro / cyan === */
-    .mh-radio {
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      z-index: 100;
-      width: min(690px, calc(100vw - 24px));
-      padding: 12px 14px;
-      border: 1px solid rgba(255,55,200,.78);
-      background: rgba(10,5,12,.96);
-      box-shadow: 0 0 24px rgba(255,55,200,.20), 4px 4px 0 rgba(52,245,255,.20);
-      backdrop-filter: blur(12px);
-    }
-
-    .radio-head {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-    }
-
-    .mh-radio .disc {
-      width: 42px;
-      height: 42px;
-      flex: 0 0 42px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255,55,200,.8);
-      border-radius: 50%;
-      background: radial-gradient(circle, #ff8cdf 0 8%, #170b18 9% 30%, #ff37c8 31% 34%, #100810 35%);
-      font-size: 20px;
-    }
-
-    .mh-radio.playing .disc {
-      animation: mhRadioSpin 2.5s linear infinite;
-    }
-
-    @keyframes mhRadioSpin {
-      to { transform: rotate(360deg); }
-    }
-
-    .mh-radio .track-info {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .mh-radio .track-info b {
-      display: block;
-      color: #ff8cdf;
-      font-size: 13px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .mh-radio .track-info span {
-      display: block;
-      margin-top: 3px;
-      color: #9f91a7;
-      font-size: 9px;
-      letter-spacing: .5px;
-    }
-
-    .radio-menu,
-    .radio-controls button {
-      border: 1px solid rgba(255,55,200,.42);
-      background: #160b16;
-      color: #ff8cdf;
-      cursor: pointer;
-      font-weight: 900;
-    }
-
-    .radio-menu {
-      width: 34px;
-      height: 30px;
-      font-size: 14px;
-    }
-
-    .radio-progress {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 9px 0 5px;
-      color: #8d7d94;
-      font-size: 9px;
-    }
-
-    #progressBar {
-      flex: 1;
-      accent-color: #ff37c8;
-    }
-
-    .radio-controls {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .radio-controls button {
-      min-width: 32px;
-      height: 30px;
-    }
-
-    .radio-controls button:hover,
-    .radio-menu:hover {
-      border-color: #34f5ff;
-      color: #34f5ff;
-    }
-
-    .radio-controls .play-main {
-      width: 38px;
-      background: #ff37c8;
-      border-color: #ff37c8;
-      color: #100510;
-      box-shadow: 3px 3px 0 #34f5ff;
-    }
-
-    .spotify-switch {
-      margin-left: auto;
-      padding: 0 11px;
-      letter-spacing: .5px;
-    }
-
-    #volumeBar {
-      width: 68px;
-      accent-color: #ff37c8;
-    }
-
-    .radio-playlist,
-    .spotify-panel {
-      display: none;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,55,200,.20);
-    }
-
-    .radio-playlist.open,
-    .spotify-panel.open {
-      display: block;
-    }
-
-    .radio-label {
-      margin-bottom: 7px;
-      color: #ff8cdf;
-      font-size: 9px;
-      font-weight: 1000;
-      letter-spacing: 1.5px;
-    }
-
-    .song {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 25px 1fr auto;
-      align-items: center;
-      gap: 7px;
-      margin: 3px 0;
-      padding: 8px;
-      text-align: left;
-      border: 1px solid transparent;
-      background: rgba(255,55,200,.04);
-      color: #c9bdcf;
-      cursor: pointer;
-    }
-
-    .song:hover,
-    .song.active {
-      border-color: rgba(255,55,200,.60);
-      background: rgba(255,55,200,.12);
-    }
-
-    .song > span {
-      color: #806f86;
-      font-size: 9px;
-    }
-
-    .song b {
-      color: #fff;
-      font-size: 10px;
-    }
-
-    .song i {
-      color: #ff8cdf;
-      font-size: 8px;
-      font-style: normal;
-    }
-
-    .radio-help {
-      margin: 7px 2px 0;
-      color: #75677b;
-      font-size: 9px;
-    }
-
-    .radio-help code {
-      color: #34f5ff;
-    }
-
-    .spotify-panel iframe {
-      display: block;
-      width: 100%;
-      border-radius: 7px;
-    }
-
-    .back-local {
-      margin-top: 7px;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      color: #ff8cdf;
-      cursor: pointer;
-      font-size: 9px;
-    }
-
-    @media (max-width: 560px) {
-      .mh-radio {
-        bottom: 7px;
-        width: calc(100vw - 14px);
-      }
-
-      .spotify-switch {
-        margin-left: 0;
-      }
-
-      #volumeBar {
-        width: 52px;
-      }
-    }
-  </style>
-
 </head>
 <body>
   <div class="background"></div>
@@ -352,197 +122,137 @@
 
   </main>
 
-  <!-- MIGUE HERRERA RADIO -->
-  <div class="music-player mh-radio" id="mhRadio">
-    <div class="radio-head">
-      <div class="disc" id="disc">💿</div>
-      <div class="track-info">
-        <b id="trackTitle">Migue Herrera Anthem</b>
-        <span id="trackSubtitle">soundtrack oficial · FANBASE RADIO</span>
-      </div>
-      <button class="radio-menu" id="radioMenu" title="Abrir playlist">☰</button>
+  <!-- Reproductor -->
+  <div class="music-player">
+    <div class="disc" id="disc">💿</div>
+    <div class="track-info">
+      <b>Migue Herrera Anthem</b>
+      <span>sonido oficial de la fanbase</span>
     </div>
-
-    <div class="radio-progress">
-      <span id="currentTime">0:00</span>
-      <input id="progressBar" type="range" min="0" max="100" value="0" aria-label="Progreso">
-      <span id="duration">0:00</span>
-    </div>
-
-    <div class="radio-controls">
-      <button type="button" id="prevBtn" title="Anterior">⏮</button>
-      <button type="button" id="playBtn" class="play-main" title="Reproducir / pausar">▶</button>
-      <button type="button" id="nextBtn" title="Siguiente">⏭</button>
-      <button type="button" id="spotifyBtn" class="spotify-switch" title="Escuchar la playlist de Spotify aquí">♫ SPOTIFY</button>
-      <input id="volumeBar" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volumen">
-    </div>
-
-    <div class="radio-playlist" id="radioPlaylist">
-      <div class="radio-label">★ FANBASE RADIO · LOCAL</div>
-
-      <button type="button" class="song active" data-src="assets/song.mp3" data-title="Migue Herrera Anthem">
-        <span>01</span><b>Migue Herrera Anthem</b><i>SOUNDTRACK</i>
-      </button>
-
-      <button type="button" class="song" data-src="assets/music/tema2.mp3" data-title="Tema 2">
-        <span>02</span><b>Tema 2</b><i>LOCAL</i>
-      </button>
-
-      <button type="button" class="song" data-src="assets/music/tema3.mp3" data-title="Tema 3">
-        <span>03</span><b>Tema 3</b><i>LOCAL</i>
-      </button>
-
-      <p class="radio-help">Poné tus MP3 en <code>assets/music/</code> y cambiá los nombres de los temas.</p>
-    </div>
-
-    <div class="spotify-panel" id="spotifyPanel">
-      <div class="radio-label">♫ MIGUE HERRERA RADIO · SPOTIFY</div>
-      <iframe
-        src="https://open.spotify.com/embed/playlist/0I1NCOodfKp7OxgPtE329c?utm_source=generator&theme=0"
-        width="100%"
-        height="152"
-        frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy">
-      </iframe>
-      <button type="button" class="back-local" id="backLocal">← VOLVER AL SOUNDTRACK</button>
-    </div>
-
-    <audio id="audio" preload="metadata"></audio>
+    <audio id="audio" loop>
+      <!-- Poné tu canción en assets/song.mp3 -->
+      <source src="assets/song.mp3" type="audio/mpeg">
+    </audio>
+    <button id="playBtn" title="Reproducir / pausar">▶</button>
+    <div class="equalizer"><i></i><i></i><i></i><i></i><i></i></div>
   </div>
 
+  <!-- GIFs decorativos: poné tus archivos en assets/gifs/ y agregalos acá -->
+  <img class="floating-gif gif1" src="assets/gifs/gif1.gif" alt="">
+  <img class="floating-gif gif2" src="assets/gifs/gif2.gif" alt="">
+  <img class="floating-gif gif3" src="assets/gifs/gif3.gif" alt="">
+  <img class="floating-gif gif4" src="assets/gifs/gif4.gif" alt="">
 
-
-
-  <script>
-  (() => {
-    const audio = document.getElementById('audio');
-    const radio = document.getElementById('mhRadio');
-    const playBtn = document.getElementById('playBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const volumeBar = document.getElementById('volumeBar');
-    const progressBar = document.getElementById('progressBar');
-    const currentTime = document.getElementById('currentTime');
-    const duration = document.getElementById('duration');
-    const title = document.getElementById('trackTitle');
-    const subtitle = document.getElementById('trackSubtitle');
-    const radioMenu = document.getElementById('radioMenu');
-    const playlist = document.getElementById('radioPlaylist');
-    const spotifyBtn = document.getElementById('spotifyBtn');
-    const spotifyPanel = document.getElementById('spotifyPanel');
-    const backLocal = document.getElementById('backLocal');
-    const songs = [...document.querySelectorAll('.mh-radio .song')];
-
-    let songIndex = 0;
-
-    const formatTime = (seconds) => {
-      if (!Number.isFinite(seconds)) return '0:00';
-      return `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
-    };
-
-    function setSong(index, autoplay = false) {
-      songIndex = (index + songs.length) % songs.length;
-      const song = songs[songIndex];
-
-      songs.forEach((item, i) => item.classList.toggle('active', i === songIndex));
-
-      audio.src = song.dataset.src;
-      audio.load();
-
-      title.textContent = song.dataset.title;
-      subtitle.textContent = songIndex === 0
-        ? 'soundtrack oficial · FANBASE RADIO'
-        : 'playlist local · FANBASE RADIO';
-
-      if (autoplay) {
-        audio.play().catch(() => {});
-      }
-    }
-
-    playBtn.addEventListener('click', () => {
-      // One click = one action. No duplicate listeners.
-      if (audio.paused) {
-        audio.play().catch(() => {});
-      } else {
-        audio.pause();
-      }
-    });
-
-    prevBtn.addEventListener('click', () => setSong(songIndex - 1, true));
-    nextBtn.addEventListener('click', () => setSong(songIndex + 1, true));
-
-    songs.forEach((song, index) => {
-      song.addEventListener('click', () => setSong(index, true));
-    });
-
-    volumeBar.addEventListener('input', () => {
-      audio.volume = Number(volumeBar.value);
-    });
-
-    progressBar.addEventListener('input', () => {
-      if (audio.duration) {
-        audio.currentTime = (Number(progressBar.value) / 100) * audio.duration;
-      }
-    });
-
-    audio.addEventListener('timeupdate', () => {
-      currentTime.textContent = formatTime(audio.currentTime);
-      progressBar.value = audio.duration
-        ? (audio.currentTime / audio.duration) * 100
-        : 0;
-    });
-
-    audio.addEventListener('loadedmetadata', () => {
-      duration.textContent = formatTime(audio.duration);
-    });
-
-    audio.addEventListener('play', () => {
-      playBtn.textContent = '⏸';
-      radio.classList.add('playing');
-    });
-
-    audio.addEventListener('pause', () => {
-      playBtn.textContent = '▶';
-      radio.classList.remove('playing');
-    });
-
-    audio.addEventListener('ended', () => {
-      setSong(songIndex + 1, true);
-    });
-
-    // Menu: show the local playlist inside the player.
-    radioMenu.addEventListener('click', () => {
-      playlist.classList.toggle('open');
-      spotifyPanel.classList.remove('open');
-    });
-
-    // Spotify: show Spotify's playlist EMBEDDED inside this page.
-    // We pause the local soundtrack so two players don't play simultaneously.
-    spotifyBtn.addEventListener('click', () => {
-      audio.pause();
-      spotifyPanel.classList.add('open');
-      playlist.classList.remove('open');
-    });
-
-    backLocal.addEventListener('click', () => {
-      spotifyPanel.classList.remove('open');
-      playlist.classList.add('open');
-    });
-
-    // If the page has an enter button, the user's click can start the soundtrack.
-    const enterBtn = document.getElementById('enterBtn');
-    if (enterBtn) {
-      enterBtn.addEventListener('click', () => {
-        audio.play().catch(() => {});
-      });
-    }
-
-    audio.volume = 0.75;
-    setSong(0, false);
-  })();
-  </script>
+  <footer>
+    MIGUE HERRERA FANBASE · mantenganse al tanto de las proximas actualizaciones!
+  </footer>
 
   <script src="script.js"></script>
+
+  <!-- SOUNDTRACK DE LA FANBASE -->
+  <div class="fanbase-soundtrack">
+    <div class="soundtrack-title">🎵 MIGUE HERRERA FANBASE</div>
+    <div class="soundtrack-row">
+      <button type="button" id="soundtrackPlay">▶</button>
+      <div class="soundtrack-info">
+        <strong>Migue Herrera Anthem</strong>
+        <span>Soundtrack oficial de la fanbase</span>
+      </div>
+      <input id="soundtrackVolume" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volumen">
+    </div>
+    <audio id="soundtrackAudio" preload="metadata" src="assets/song.mp3"></audio>
+  </div>
+
+  <style>
+    .fanbase-soundtrack {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 999;
+      width: min(430px, calc(100vw - 24px));
+      padding: 11px 13px;
+      background: rgba(12, 7, 13, .96);
+      border: 1px solid #ff7ed8;
+      box-shadow: 4px 4px 0 rgba(52,245,255,.25), 0 0 18px rgba(255,126,216,.18);
+      color: #fff;
+      backdrop-filter: blur(8px);
+    }
+    .soundtrack-title {
+      color: #ff8cdf;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+    .soundtrack-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    #soundtrackPlay {
+      width: 34px;
+      height: 30px;
+      border: 1px solid #ff7ed8;
+      background: #ff37c8;
+      color: #120712;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 #34f5ff;
+    }
+    .soundtrack-info {
+      min-width: 0;
+      flex: 1;
+    }
+    .soundtrack-info strong {
+      display: block;
+      color: #fff;
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .soundtrack-info span {
+      display: block;
+      color: #9f91a7;
+      font-size: 8px;
+      margin-top: 2px;
+    }
+    #soundtrackVolume {
+      width: 65px;
+      accent-color: #ff37c8;
+    }
+  </style>
+
+  <script>
+    (() => {
+      const audio = document.getElementById('soundtrackAudio');
+      const button = document.getElementById('soundtrackPlay');
+      const volume = document.getElementById('soundtrackVolume');
+
+      button.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play().catch(() => {});
+        } else {
+          audio.pause();
+        }
+      });
+
+      audio.addEventListener('play', () => {
+        button.textContent = '⏸';
+      });
+
+      audio.addEventListener('pause', () => {
+        button.textContent = '▶';
+      });
+
+      volume.addEventListener('input', () => {
+        audio.volume = Number(volume.value);
+      });
+
+      audio.volume = 0.75;
+    })();
+  </script>
+
 </body>
 </html>
