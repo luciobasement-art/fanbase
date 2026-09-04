@@ -130,19 +130,16 @@ body {
   text-shadow: 0 0 10px var(--purple);
 }
 
-/* LAYOUT CON SIDEBAR DE NOTAS */
+/* LAYOUT NORMAL */
 .main-wrapper {
-  display: flex;
-  gap: 20px;
-  width: min(1200px, 94vw);
+  display: block;
+  width: min(650px, 94vw);
   margin: 0 auto 120px;
   position: relative;
 }
 
 .feed {
-  flex: 1;
-  min-width: 0;
-  max-width: 650px;
+  width: 100%;
 }
 
 .post {
@@ -303,12 +300,15 @@ body {
   height: auto;
 }
 
-/* ========== STICKY NOTES SIDEBAR ========== */
+/* ========== STICKY NOTES SIDEBAR - POSICIONADO EN BORDE DERECHO ========== */
 .sticky-notes-sidebar {
+  position: fixed;
+  right: 15px;
+  top: 150px;
   width: 280px;
-  max-height: fit-content;
-  position: sticky;
-  top: 30px;
+  max-height: calc(100vh - 200px);
+  z-index: 40;
+  pointer-events: auto;
 }
 
 .sticky-header {
@@ -352,7 +352,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 600px;
+  max-height: calc(100vh - 280px);
   overflow-y: auto;
   padding-right: 5px;
 }
@@ -387,6 +387,7 @@ body {
   display: flex;
   flex-direction: column;
   animation: noteAppear 0.3s ease-out;
+  flex-shrink: 0;
 }
 
 .sticky-note:nth-child(even) {
@@ -667,15 +668,23 @@ footer {
 @keyframes eq { to { height: 24px; } }
 
 /* RESPONSIVE */
-@media (max-width: 1000px) {
-  .main-wrapper {
-    flex-direction: column;
+@media (max-width: 1200px) {
+  .sticky-notes-sidebar {
+    right: 10px;
+    width: 250px;
   }
 
+  .sticky-note {
+    min-height: 90px;
+  }
+}
+
+@media (max-width: 900px) {
   .sticky-notes-sidebar {
+    position: static;
     width: 100%;
     max-height: none;
-    position: static;
+    margin-bottom: 20px;
   }
 
   .sticky-notes-container {
@@ -697,8 +706,8 @@ footer {
   .post { padding: 12px; }
   .music-player { bottom: 8px; }
   
-  .main-wrapper {
-    gap: 10px;
+  .sticky-notes-sidebar {
+    width: 100%;
   }
 
   .sticky-notes-container {
