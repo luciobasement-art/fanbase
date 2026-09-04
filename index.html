@@ -370,31 +370,29 @@
     </div>
 
     <div class="radio-controls">
-      <button id="prevBtn" title="Anterior">⏮</button>
-      <button id="playBtn" class="play-main" title="Reproducir / pausar">▶</button>
-      <button id="nextBtn" title="Siguiente">⏭</button>
-      <button id="spotifyBtn" class="spotify-switch" title="Cambiar a Spotify">♫ SPOTIFY</button>
+      <button type="button" id="prevBtn" title="Anterior">⏮</button>
+      <button type="button" id="playBtn" class="play-main" title="Reproducir / pausar">▶</button>
+      <button type="button" id="nextBtn" title="Siguiente">⏭</button>
+      <button type="button" id="spotifyBtn" class="spotify-switch" title="Escuchar la playlist de Spotify aquí">♫ SPOTIFY</button>
       <input id="volumeBar" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volumen">
     </div>
 
     <div class="radio-playlist" id="radioPlaylist">
       <div class="radio-label">★ FANBASE RADIO · LOCAL</div>
 
-      <button class="song active" data-src="assets/song.mp3" data-title="Migue Herrera Anthem">
+      <button type="button" class="song active" data-src="assets/song.mp3" data-title="Migue Herrera Anthem">
         <span>01</span><b>Migue Herrera Anthem</b><i>SOUNDTRACK</i>
       </button>
 
-      <button class="song" data-src="assets/music/tema2.mp3" data-title="Tema 2">
+      <button type="button" class="song" data-src="assets/music/tema2.mp3" data-title="Tema 2">
         <span>02</span><b>Tema 2</b><i>LOCAL</i>
       </button>
 
-      <button class="song" data-src="assets/music/tema3.mp3" data-title="Tema 3">
+      <button type="button" class="song" data-src="assets/music/tema3.mp3" data-title="Tema 3">
         <span>03</span><b>Tema 3</b><i>LOCAL</i>
       </button>
 
-      <p class="radio-help">
-        Poné tus MP3 en <code>assets/music/</code> y cambiá los nombres de los temas.
-      </p>
+      <p class="radio-help">Poné tus MP3 en <code>assets/music/</code> y cambiá los nombres de los temas.</p>
     </div>
 
     <div class="spotify-panel" id="spotifyPanel">
@@ -407,140 +405,142 @@
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy">
       </iframe>
-      <button class="back-local" id="backLocal">← VOLVER AL SOUNDTRACK</button>
+      <button type="button" class="back-local" id="backLocal">← VOLVER AL SOUNDTRACK</button>
     </div>
 
-    <audio id="audio" preload="metadata">
-      <source src="assets/song.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="audio" preload="metadata"></audio>
   </div>
-<!-- GIFs decorativos: poné tus archivos en assets/gifs/ y agregalos acá -->
-  <img class="floating-gif gif1" src="assets/gifs/gif1.gif" alt="">
-  <img class="floating-gif gif2" src="assets/gifs/gif2.gif" alt="">
-  <img class="floating-gif gif3" src="assets/gifs/gif3.gif" alt="">
-  <img class="floating-gif gif4" src="assets/gifs/gif4.gif" alt="">
 
-  <footer>
-    MIGUE HERRERA FANBASE · mantenganse al tanto de las proximas actualizaciones!
-  </footer>
 
-  
+
+
   <script>
-    (() => {
-      const audio = document.getElementById('audio');
-      const radio = document.getElementById('mhRadio');
-      const play = document.getElementById('playBtn');
-      const prev = document.getElementById('prevBtn');
-      const next = document.getElementById('nextBtn');
-      const volume = document.getElementById('volumeBar');
-      const progress = document.getElementById('progressBar');
-      const current = document.getElementById('currentTime');
-      const duration = document.getElementById('duration');
-      const title = document.getElementById('trackTitle');
-      const subtitle = document.getElementById('trackSubtitle');
-      const menu = document.getElementById('radioMenu');
-      const list = document.getElementById('radioPlaylist');
-      const spotifyBtn = document.getElementById('spotifyBtn');
-      const spotifyPanel = document.getElementById('spotifyPanel');
-      const backLocal = document.getElementById('backLocal');
-      const songs = [...document.querySelectorAll('.mh-radio .song')];
-      let currentSong = 0;
+  (() => {
+    const audio = document.getElementById('audio');
+    const radio = document.getElementById('mhRadio');
+    const playBtn = document.getElementById('playBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const volumeBar = document.getElementById('volumeBar');
+    const progressBar = document.getElementById('progressBar');
+    const currentTime = document.getElementById('currentTime');
+    const duration = document.getElementById('duration');
+    const title = document.getElementById('trackTitle');
+    const subtitle = document.getElementById('trackSubtitle');
+    const radioMenu = document.getElementById('radioMenu');
+    const playlist = document.getElementById('radioPlaylist');
+    const spotifyBtn = document.getElementById('spotifyBtn');
+    const spotifyPanel = document.getElementById('spotifyPanel');
+    const backLocal = document.getElementById('backLocal');
+    const songs = [...document.querySelectorAll('.mh-radio .song')];
 
-      const fmt = (seconds) => {
-        if (!Number.isFinite(seconds)) return '0:00';
-        return Math.floor(seconds / 60) + ':' + String(Math.floor(seconds % 60)).padStart(2, '0');
-      };
+    let songIndex = 0;
 
-      function loadSong(index, autoplay = false) {
-        currentSong = (index + songs.length) % songs.length;
-        const item = songs[currentSong];
+    const formatTime = (seconds) => {
+      if (!Number.isFinite(seconds)) return '0:00';
+      return `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+    };
 
-        songs.forEach((song, i) => {
-          song.classList.toggle('active', i === currentSong);
-        });
+    function setSong(index, autoplay = false) {
+      songIndex = (index + songs.length) % songs.length;
+      const song = songs[songIndex];
 
-        audio.src = item.dataset.src;
-        audio.load();
-        title.textContent = item.dataset.title;
-        subtitle.textContent = currentSong === 0
-          ? 'soundtrack oficial · FANBASE RADIO'
-          : 'playlist local · FANBASE RADIO';
+      songs.forEach((item, i) => item.classList.toggle('active', i === songIndex));
 
-        if (autoplay) audio.play().catch(() => {});
+      audio.src = song.dataset.src;
+      audio.load();
+
+      title.textContent = song.dataset.title;
+      subtitle.textContent = songIndex === 0
+        ? 'soundtrack oficial · FANBASE RADIO'
+        : 'playlist local · FANBASE RADIO';
+
+      if (autoplay) {
+        audio.play().catch(() => {});
       }
+    }
 
-      play.addEventListener('click', () => {
-        if (audio.paused) audio.play().catch(() => {});
-        else audio.pause();
-      });
-
-      prev.addEventListener('click', () => loadSong(currentSong - 1, true));
-      next.addEventListener('click', () => loadSong(currentSong + 1, true));
-
-      songs.forEach((song, index) => {
-        song.addEventListener('click', () => loadSong(index, true));
-      });
-
-      volume.addEventListener('input', () => {
-        audio.volume = Number(volume.value);
-      });
-
-      progress.addEventListener('input', () => {
-        if (audio.duration) {
-          audio.currentTime = (Number(progress.value) / 100) * audio.duration;
-        }
-      });
-
-      audio.addEventListener('timeupdate', () => {
-        current.textContent = fmt(audio.currentTime);
-        progress.value = audio.duration
-          ? (audio.currentTime / audio.duration) * 100
-          : 0;
-      });
-
-      audio.addEventListener('loadedmetadata', () => {
-        duration.textContent = fmt(audio.duration);
-      });
-
-      audio.addEventListener('play', () => {
-        play.textContent = '⏸';
-        radio.classList.add('playing');
-      });
-
-      audio.addEventListener('pause', () => {
-        play.textContent = '▶';
-        radio.classList.remove('playing');
-      });
-
-      audio.addEventListener('ended', () => loadSong(currentSong + 1, true));
-
-      menu.addEventListener('click', () => {
-        list.classList.toggle('open');
-        spotifyPanel.classList.remove('open');
-      });
-
-      spotifyBtn.addEventListener('click', () => {
-        spotifyPanel.classList.add('open');
-        list.classList.remove('open');
-      });
-
-      backLocal.addEventListener('click', () => {
-        spotifyPanel.classList.remove('open');
-        list.classList.add('open');
-      });
-
-      /* Al entrar a la fanbase, intentamos arrancar el soundtrack.
-         El navegador puede bloquear autoplay; el botón ▶ siempre lo permite. */
-      const enter = document.getElementById('enterBtn');
-      if (enter) {
-        enter.addEventListener('click', () => {
-          audio.play().catch(() => {});
-        });
+    playBtn.addEventListener('click', () => {
+      // One click = one action. No duplicate listeners.
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      } else {
+        audio.pause();
       }
+    });
 
-      audio.volume = 0.75;
-      loadSong(0, false);
-    })();
+    prevBtn.addEventListener('click', () => setSong(songIndex - 1, true));
+    nextBtn.addEventListener('click', () => setSong(songIndex + 1, true));
+
+    songs.forEach((song, index) => {
+      song.addEventListener('click', () => setSong(index, true));
+    });
+
+    volumeBar.addEventListener('input', () => {
+      audio.volume = Number(volumeBar.value);
+    });
+
+    progressBar.addEventListener('input', () => {
+      if (audio.duration) {
+        audio.currentTime = (Number(progressBar.value) / 100) * audio.duration;
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      currentTime.textContent = formatTime(audio.currentTime);
+      progressBar.value = audio.duration
+        ? (audio.currentTime / audio.duration) * 100
+        : 0;
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      duration.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('play', () => {
+      playBtn.textContent = '⏸';
+      radio.classList.add('playing');
+    });
+
+    audio.addEventListener('pause', () => {
+      playBtn.textContent = '▶';
+      radio.classList.remove('playing');
+    });
+
+    audio.addEventListener('ended', () => {
+      setSong(songIndex + 1, true);
+    });
+
+    // Menu: show the local playlist inside the player.
+    radioMenu.addEventListener('click', () => {
+      playlist.classList.toggle('open');
+      spotifyPanel.classList.remove('open');
+    });
+
+    // Spotify: show Spotify's playlist EMBEDDED inside this page.
+    // We pause the local soundtrack so two players don't play simultaneously.
+    spotifyBtn.addEventListener('click', () => {
+      audio.pause();
+      spotifyPanel.classList.add('open');
+      playlist.classList.remove('open');
+    });
+
+    backLocal.addEventListener('click', () => {
+      spotifyPanel.classList.remove('open');
+      playlist.classList.add('open');
+    });
+
+    // If the page has an enter button, the user's click can start the soundtrack.
+    const enterBtn = document.getElementById('enterBtn');
+    if (enterBtn) {
+      enterBtn.addEventListener('click', () => {
+        audio.play().catch(() => {});
+      });
+    }
+
+    audio.volume = 0.75;
+    setSong(0, false);
+  })();
   </script>
 
   <script src="script.js"></script>
