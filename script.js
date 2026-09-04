@@ -26,16 +26,13 @@ const trackArtist = document.getElementById("trackArtist");
 
 
 /*
-   IMPORTANTE:
+   CANCIONES
 
-   Todos estos archivos tienen que estar dentro de:
+   Migue Herrera Anthem:
+   assets/song.mp3
 
+   Los demás temas están dentro de:
    assets/music/
-
-   EXCEPTO song.mp3, que sigue siendo el Anthem.
-
-   Si preferís meter todos los MP3 directamente dentro
-   de assets/, cambiá "assets/music/" por "assets/".
 */
 
 const songs = [
@@ -44,12 +41,6 @@ const songs = [
     title: "Migue Herrera Anthem",
     artist: "sonido oficial de la fanbase",
     file: "assets/song.mp3"
-  },
-
-  {
-    title: "3SOME - Chzter, FLVCKKA, angely2k",
-    artist: "3SOME",
-    file: "assets/music/3SOME - Chzter, FLVCKKA, angely2k.mp3"
   },
 
   {
@@ -65,53 +56,38 @@ const songs = [
   },
 
   {
-    title: "CHRYSTAL - THE DAYS",
-    artist: "NOTION REMIX",
-    file: "assets/music/CHRYSTAL - THE DAYS (NOTION REMIX).mp3"
-  },
-
-  {
     title: "Lykke Li - I Follow Rivers",
     artist: "Lykke Li",
     file: "assets/music/Lykke Li - I Follow Rivers (Lyrics).mp3"
   },
 
   {
-    title: "Mike Posner - I Took A Pill In Ibiza",
-    artist: "Seeb Remix",
-    file: "assets/music/Mike Posner - I Took A Pill In Ibiza (Seeb Remix) (Explicit).mp3"
-  },
-
-  {
     title: "Rihanna - Man Down",
     artist: "Rihanna",
-    file: "assets/music/Rihanna - Man Down.mp3"
+    file: "assets/music/Rihanna - Man Down (Audio).mp3"
   },
 
   {
     title: "Rihanna - Rude Boy",
     artist: "Rihanna",
     file: "assets/music/Rihanna - Rude Boy.mp3"
-  },
-
-  {
-    title: "si se echa un pedo se lo velo",
-    artist: "sonido de la fanbase",
-    file: "assets/music/si se echa un pedo se lo velo.mp3"
   }
 
 ];
 
 
 /*
-   Elegimos una canción ALEATORIA.
-
-   Esto significa que NO empieza siempre con
+   La canción inicial es ALEATORIA.
+   NO empieza obligatoriamente con
    Migue Herrera Anthem.
 */
 
 let currentSong = -1;
 
+
+/* =====================================================
+   ELEGIR CANCION ALEATORIA
+   ===================================================== */
 
 function randomSong() {
 
@@ -136,8 +112,13 @@ function randomSong() {
   currentSong = randomIndex;
 
   loadSong(currentSong);
+
 }
 
+
+/* =====================================================
+   CARGAR CANCION
+   ===================================================== */
 
 function loadSong(index) {
 
@@ -158,9 +139,9 @@ function loadSong(index) {
 }
 
 
-/*
-   Reproduce la canción actual.
-*/
+/* =====================================================
+   REPRODUCIR
+   ===================================================== */
 
 async function playMusic() {
 
@@ -185,9 +166,9 @@ async function playMusic() {
 }
 
 
-/*
-   Pausa.
-*/
+/* =====================================================
+   PAUSAR
+   ===================================================== */
 
 function pauseMusic() {
 
@@ -203,12 +184,9 @@ function pauseMusic() {
 }
 
 
-/*
-   Botón ENTER.
-
-   Primero elegimos la canción aleatoria
-   y después intentamos reproducirla.
-*/
+/* =====================================================
+   BOTON ENTRAR
+   ===================================================== */
 
 enterBtn.addEventListener(
   "click",
@@ -216,6 +194,11 @@ enterBtn.addEventListener(
 
     welcome.style.display =
       "none";
+
+    /*
+       Elegimos una canción aleatoria
+       cuando entra a la página.
+    */
 
     randomSong();
 
@@ -225,9 +208,9 @@ enterBtn.addEventListener(
 );
 
 
-/*
-   Play / pausa
-*/
+/* =====================================================
+   PLAY / PAUSA
+   ===================================================== */
 
 playBtn.addEventListener(
   "click",
@@ -247,28 +230,29 @@ playBtn.addEventListener(
 );
 
 
-/*
-   Siguiente canción.
+/* =====================================================
+   SIGUIENTE CANCION
+   ===================================================== */
 
-   También selecciona aleatoriamente.
-*/
+if (nextBtn) {
 
-nextBtn.addEventListener(
-  "click",
-  async () => {
+  nextBtn.addEventListener(
+    "click",
+    async () => {
 
-    randomSong();
+      randomSong();
 
-    await playMusic();
+      await playMusic();
 
-  }
-);
+    }
+  );
+
+}
 
 
-/*
-   Cuando termina una canción,
-   automáticamente elige otra aleatoria.
-*/
+/* =====================================================
+   CUANDO TERMINA UNA CANCION
+   ===================================================== */
 
 audio.addEventListener(
   "ended",
@@ -282,11 +266,9 @@ audio.addEventListener(
 );
 
 
-/*
-   Si un archivo no existe,
-   mostramos el nombre en el reproductor
-   pero no rompemos la página.
-*/
+/* =====================================================
+   ERROR DE AUDIO
+   ===================================================== */
 
 audio.addEventListener(
   "error",
@@ -338,13 +320,9 @@ const notesSidebar =
   );
 
 
-/*
-   Cargar notas guardadas.
-
-   Se utiliza localStorage para que,
-   si volvés a abrir la página en el mismo
-   navegador, sigan apareciendo.
-*/
+/* =====================================================
+   CARGAR NOTAS
+   ===================================================== */
 
 function loadNotes() {
 
@@ -373,9 +351,9 @@ function loadNotes() {
 }
 
 
-/*
-   Crear una nota.
-*/
+/* =====================================================
+   CREAR NOTA
+   ===================================================== */
 
 function createNoteElement(
   name,
@@ -391,12 +369,6 @@ function createNoteElement(
   noteEl.className =
     "sticky-note";
 
-
-  /*
-     Usamos textContent en vez de
-     meter directamente el texto
-     dentro de innerHTML.
-  */
 
   const deleteButton =
     document.createElement(
@@ -467,9 +439,9 @@ function createNoteElement(
 }
 
 
-/*
-   Guardar una nueva nota.
-*/
+/* =====================================================
+   GUARDAR NOTA
+   ===================================================== */
 
 function saveNote() {
 
@@ -501,8 +473,11 @@ function saveNote() {
 
 
   notes.push({
+
     name: name,
+
     text: text
+
   });
 
 
@@ -524,9 +499,9 @@ function saveNote() {
 }
 
 
-/*
-   Eliminar una nota.
-*/
+/* =====================================================
+   ELIMINAR NOTA
+   ===================================================== */
 
 function deleteNote(index) {
 
@@ -555,85 +530,102 @@ function deleteNote(index) {
 }
 
 
-/*
-   Botón PEGAR NOTITA
-*/
+/* =====================================================
+   BOTON PEGAR NOTITA
+   ===================================================== */
 
-addNoteBtn.addEventListener(
-  "click",
-  saveNote
-);
+if (addNoteBtn) {
 
+  addNoteBtn.addEventListener(
+    "click",
+    saveNote
+  );
 
-/*
-   CTRL + ENTER también guarda.
-*/
-
-noteTextInput.addEventListener(
-  "keydown",
-  (event) => {
-
-    if (
-      event.ctrlKey &&
-      event.key === "Enter"
-    ) {
-
-      saveNote();
-
-    }
-
-  }
-);
+}
 
 
-/*
-   Ocultar / mostrar las notitas.
-*/
+/* =====================================================
+   CTRL + ENTER
+   ===================================================== */
 
-toggleNotesBtn.addEventListener(
-  "click",
-  () => {
+if (noteTextInput) {
 
-    const hidden =
-      notesContainer.style.display ===
-      "none";
+  noteTextInput.addEventListener(
+    "keydown",
+    (event) => {
 
-    if (hidden) {
+      if (
+        event.ctrlKey &&
+        event.key === "Enter"
+      ) {
 
-      notesContainer.style.display =
-        "";
+        saveNote();
 
-      document.querySelector(
-        ".note-form"
-      ).style.display =
-        "";
-
-      toggleNotesBtn.textContent =
-        "−";
-
-      toggleNotesBtn.title =
-        "Ocultar notas";
-
-    } else {
-
-      notesContainer.style.display =
-        "none";
-
-      document.querySelector(
-        ".note-form"
-      ).style.display =
-        "none";
-
-      toggleNotesBtn.textContent =
-        "+";
-
-      toggleNotesBtn.title =
-        "Mostrar notas";
+      }
 
     }
+  );
 
-  }
-);
+}
+
+
+/* =====================================================
+   OCULTAR / MOSTRAR NOTITAS
+   ===================================================== */
+
+if (toggleNotesBtn) {
+
+  toggleNotesBtn.addEventListener(
+    "click",
+    () => {
+
+      const form =
+        document.querySelector(
+          ".note-form"
+        );
+
+      const hidden =
+        notesContainer.style.display ===
+        "none";
+
+
+      if (hidden) {
+
+        notesContainer.style.display =
+          "";
+
+        if (form) {
+          form.style.display = "";
+        }
+
+        toggleNotesBtn.textContent =
+          "−";
+
+        toggleNotesBtn.title =
+          "Ocultar notas";
+
+      } else {
+
+        notesContainer.style.display =
+          "none";
+
+        if (form) {
+          form.style.display =
+            "none";
+        }
+
+        toggleNotesBtn.textContent =
+          "+";
+
+        toggleNotesBtn.title =
+          "Mostrar notas";
+
+      }
+
+    }
+  );
+
+}
 
 
 /* =====================================================
