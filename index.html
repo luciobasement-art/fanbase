@@ -90,6 +90,128 @@
   </header>
 
   <main class="feed">
+    <!-- =====================================================
+         POST: TRANSMISIONES EN VIVO
+         ===================================================== -->
+
+    <article class="post live-post">
+
+      <div class="post-head">
+
+        <div class="avatar live-avatar">
+          LIVE
+        </div>
+
+        <div>
+          <strong>migueherrerafanpage</strong>
+          <span>@migueherrerafanpage · ahora</span>
+        </div>
+
+        <button class="dots" type="button">
+          •••
+        </button>
+
+      </div>
+
+
+      <div class="live-banner">
+        🔴 TRANSMISIONES EN VIVO AVALADAS POR MIGUE HERRERA
+      </div>
+
+
+      <div class="caption">
+
+        <b>
+          Mirá quién está transmitiendo en vivo y bancá a la comunidad.
+        </b>
+
+      </div>
+
+
+      <div class="live-grid">
+
+
+        <!-- JUANSSETE -->
+
+        <a
+          class="live-card"
+          id="juansseteLive"
+          href="https://www.tiktok.com/@Juanssete"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          <div class="live-card-top">
+
+            <span class="live-dot"></span>
+
+            <span class="live-status">
+              NO EN VIVO
+            </span>
+
+          </div>
+
+          <strong>
+            @Juanssete
+          </strong>
+
+          <span>
+            🎥 TikTok
+          </span>
+
+          <b>
+            VER EN TIKTOK →
+          </b>
+
+        </a>
+
+
+        <!-- VEIGARCIANO -->
+
+        <a
+          class="live-card"
+          id="veigarcianoLive"
+          href="https://www.tiktok.com/@Veigarciano"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+
+          <div class="live-card-top">
+
+            <span class="live-dot"></span>
+
+            <span class="live-status">
+              NO EN VIVO
+            </span>
+
+          </div>
+
+          <strong>
+            @Veigarciano
+          </strong>
+
+          <span>
+            🎥 TikTok
+          </span>
+
+          <b>
+            VER EN TIKTOK →
+          </b>
+
+        </a>
+
+
+      </div>
+
+
+      <div class="live-note">
+
+        Tocá cualquiera de los perfiles para abrir su TikTok.
+
+      </div>
+
+    </article>
+
 
     <!-- POST 1: EDIT -->
     <article class="post">
@@ -301,7 +423,103 @@
     </article>
 
   </main>
+  <!-- =====================================================
+       POST-ITS DE LA COMUNIDAD
+       ===================================================== -->
 
+  <div class="sticky-notes-sidebar">
+
+    <div class="sticky-header">
+
+      <h3>
+        📝 NOTITAS
+      </h3>
+
+      <button
+        id="addNoteBtn"
+        class="add-note-btn"
+        type="button"
+        title="Agregar una nota"
+      >
+        +
+      </button>
+
+    </div>
+
+
+    <div
+      id="notesContainer"
+      class="sticky-notes-container"
+    ></div>
+
+  </div>
+
+
+  <!-- MODAL PARA ESCRIBIR UNA NOTA -->
+
+  <div
+    id="noteModal"
+    class="note-modal"
+  >
+
+    <div class="note-modal-content">
+
+      <h2>
+        ✍️ Nueva Nota
+      </h2>
+
+      <div class="form-group">
+
+        <label for="noteName">
+          Tu nombre
+        </label>
+
+        <input
+          type="text"
+          id="noteName"
+          placeholder="ej: lucio, papu, etc."
+          maxlength="30"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="noteText">
+          Tu nota
+        </label>
+
+        <textarea
+          id="noteText"
+          placeholder="Escribí lo que quieras..."
+          maxlength="180"
+        ></textarea>
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="btn-cancel cancel-note"
+          type="button"
+        >
+          CANCELAR
+        </button>
+
+        <button
+          class="btn-save save-note"
+          type="button"
+        >
+          PEGAR NOTA
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
   <!-- Reproductor -->
   <div class="music-player">
     <div class="disc" id="disc">💿</div>
