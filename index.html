@@ -427,99 +427,78 @@
        POST-ITS DE LA COMUNIDAD
        ===================================================== -->
 
-  <div class="sticky-notes-sidebar">
+  <aside class="sticky-notes-sidebar">
 
     <div class="sticky-header">
 
-      <h3>
-        📝 NOTITAS
-      </h3>
+      <h3>📝 NOTITAS</h3>
 
       <button
-        id="addNoteBtn"
-        class="add-note-btn"
+        id="toggleNotesBtn"
+        class="notes-toggle"
         type="button"
-        title="Agregar una nota"
+        title="Ocultar / mostrar notas"
       >
-        +
+        −
       </button>
 
     </div>
 
+
+    <!-- FORMULARIO DIRECTAMENTE DEBAJO DE "NOTITAS" -->
+
+    <div class="note-form">
+
+      <div class="note-input-row">
+
+        <label for="noteName">
+          NOMBRE:
+        </label>
+
+        <input
+          id="noteName"
+          type="text"
+          maxlength="30"
+          placeholder="Tu nombre"
+        >
+
+      </div>
+
+
+      <div class="note-input-row">
+
+        <label for="noteText">
+          NOTA:
+        </label>
+
+        <textarea
+          id="noteText"
+          maxlength="180"
+          placeholder="Escribí una notita..."
+        ></textarea>
+
+      </div>
+
+
+      <button
+        id="addNoteBtn"
+        class="add-note-submit"
+        type="button"
+      >
+        PEGAR NOTITA ✦
+      </button>
+
+    </div>
+
+
+    <!-- ACÁ VAN ACUMULÁNDOSE LAS NOTAS -->
 
     <div
       id="notesContainer"
       class="sticky-notes-container"
     ></div>
 
-  </div>
-
-
-  <!-- MODAL PARA ESCRIBIR UNA NOTA -->
-
-  <div
-    id="noteModal"
-    class="note-modal"
-  >
-
-    <div class="note-modal-content">
-
-      <h2>
-        ✍️ Nueva Nota
-      </h2>
-
-      <div class="form-group">
-
-        <label for="noteName">
-          Tu nombre
-        </label>
-
-        <input
-          type="text"
-          id="noteName"
-          placeholder="ej: lucio, papu, etc."
-          maxlength="30"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="noteText">
-          Tu nota
-        </label>
-
-        <textarea
-          id="noteText"
-          placeholder="Escribí lo que quieras..."
-          maxlength="180"
-        ></textarea>
-
-      </div>
-
-
-      <div class="modal-actions">
-
-        <button
-          class="btn-cancel cancel-note"
-          type="button"
-        >
-          CANCELAR
-        </button>
-
-        <button
-          class="btn-save save-note"
-          type="button"
-        >
-          PEGAR NOTA
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
+  </aside>
   <!-- Reproductor -->
   <div class="music-player">
     <div class="disc" id="disc">💿</div>
