@@ -12,12 +12,17 @@
 
 <body>
 
-  <!-- FONDO -->
+  <!-- =====================================================
+       FONDO
+       ===================================================== -->
+
   <div class="background"></div>
   <div class="scanlines"></div>
 
 
-  <!-- PANTALLA INICIAL -->
+  <!-- =====================================================
+       PANTALLA INICIAL
+       ===================================================== -->
 
   <div id="welcome" class="welcome">
 
@@ -46,7 +51,9 @@
   </div>
 
 
-  <!-- HEADER -->
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
 
   <header class="site-header">
 
@@ -82,7 +89,7 @@
       </div>
 
       <div class="live-subtitle">
-        avaladas por migue herrera
+        transmisiones en vivo avaladas por migue herrera
       </div>
 
     </div>
@@ -161,13 +168,16 @@
 
 
     <div class="live-note">
-      ⚡ Hacé click para entrar directamente a su TikTok ⚡
+      ⚡ HACÉ CLICK EN VER LIVE PARA ENTRAR DIRECTAMENTE AL TIKTOK ⚡
     </div>
 
   </section>
 
 
-  <!-- FEED -->
+
+  <!-- =====================================================
+       FEED
+       ===================================================== -->
 
   <main class="feed">
 
@@ -218,8 +228,6 @@
 
 
       <div class="video-wrap">
-
-        <!-- iJEu8NwmGOQ -->
 
         <iframe
           src="https://www.youtube.com/embed/iJEu8NwmGOQ?origin=https://www.youtube.com"
@@ -472,8 +480,6 @@
     id="notesSidebar"
   >
 
-    <!-- TITULO -->
-
     <div class="sticky-header">
 
       <h3>
@@ -491,7 +497,7 @@
     </div>
 
 
-    <!-- FORMULARIO -->
+    <!-- FORMULARIO DENTRO DEL APARTADO NOTITAS -->
 
     <div class="note-form">
 
@@ -537,7 +543,7 @@
     </div>
 
 
-    <!-- ACA APARECEN LAS NOTITAS -->
+    <!-- LAS NOTITAS APARECEN ACÁ -->
 
     <div
       id="notesContainer"
@@ -564,11 +570,11 @@
 
     <div class="track-info">
 
-      <b>
+      <b id="trackTitle">
         Migue Herrera Anthem
       </b>
 
-      <span>
+      <span id="trackArtist">
         sonido oficial de la fanbase
       </span>
 
@@ -576,12 +582,6 @@
 
 
     <audio id="audio">
-
-      <source
-        src="assets/song.mp3"
-        type="audio/mpeg"
-      >
-
     </audio>
 
 
@@ -590,6 +590,15 @@
       title="Reproducir / pausar"
     >
       ▶
+    </button>
+
+
+    <button
+      id="nextBtn"
+      class="next-track"
+      title="Siguiente canción"
+    >
+      ⏭
     </button>
 
 
@@ -637,7 +646,9 @@
 
 
 
-  <!-- FOOTER -->
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
 
   <footer>
 
