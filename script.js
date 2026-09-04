@@ -25,15 +25,9 @@ const trackTitle = document.getElementById("trackTitle");
 const trackArtist = document.getElementById("trackArtist");
 
 
-/*
+/* =====================================================
    CANCIONES
-
-   Migue Herrera Anthem:
-   assets/song.mp3
-
-   Los demás temas están dentro de:
-   assets/music/
-*/
+   ===================================================== */
 
 const songs = [
 
@@ -44,43 +38,41 @@ const songs = [
   },
 
   {
-    title: "Addison Rae - Diet Pepsi",
+    title: "Diet Pepsi",
     artist: "Addison Rae",
-    file: "assets/music/Addison Rae - Diet Pepsi (Official Lyric Video).mp3"
+    file: "assets/music/diet-pepsi.mp3"
   },
 
   {
-    title: "Addison Rae - Headphones On",
+    title: "Headphones On",
     artist: "Addison Rae",
-    file: "assets/music/Addison Rae - Headphones On (Official Lyric Video).mp3"
+    file: "assets/music/headphones-on.mp3"
   },
 
   {
-    title: "Lykke Li - I Follow Rivers",
+    title: "I Follow Rivers",
     artist: "Lykke Li",
-    file: "assets/music/Lykke Li - I Follow Rivers (Lyrics).mp3"
+    file: "assets/music/follow-rivers.mp3"
   },
 
   {
-    title: "Rihanna - Man Down",
+    title: "Man Down",
     artist: "Rihanna",
-    file: "assets/music/Rihanna - Man Down (Audio).mp3"
+    file: "assets/music/man-down.mp3"
   },
 
   {
-    title: "Rihanna - Rude Boy",
+    title: "Rude Boy",
     artist: "Rihanna",
-    file: "assets/music/Rihanna - Rude Boy.mp3"
+    file: "assets/music/rude-boy.mp3"
   }
 
 ];
 
 
-/*
-   La canción inicial es ALEATORIA.
-   NO empieza obligatoriamente con
-   Migue Herrera Anthem.
-*/
+/* =====================================================
+   CANCION ACTUAL
+   ===================================================== */
 
 let currentSong = -1;
 
@@ -100,9 +92,7 @@ function randomSong() {
   do {
 
     randomIndex =
-      Math.floor(
-        Math.random() * songs.length
-      );
+      Math.floor(Math.random() * songs.length);
 
   } while (
     songs.length > 1 &&
@@ -130,6 +120,8 @@ function loadSong(index) {
 
   audio.src = song.file;
 
+  audio.load();
+
   trackTitle.textContent =
     song.title;
 
@@ -149,17 +141,18 @@ async function playMusic() {
 
     await audio.play();
 
-    playBtn.textContent =
-      "❚❚";
+    playBtn.textContent = "❚❚";
 
-    player.classList.add(
-      "playing"
-    );
+    player.classList.add("playing");
 
   } catch (error) {
 
-    playBtn.textContent =
-      "▶";
+    console.error(
+      "No se pudo reproducir la canción:",
+      error
+    );
+
+    playBtn.textContent = "▶";
 
   }
 
@@ -174,60 +167,64 @@ function pauseMusic() {
 
   audio.pause();
 
-  playBtn.textContent =
-    "▶";
+  playBtn.textContent = "▶";
 
-  player.classList.remove(
-    "playing"
+  player.classList.remove("playing");
+
+}
+
+
+/* =====================================================
+   ENTRAR A LA FANBASE
+   ===================================================== */
+
+if (enterBtn) {
+
+  enterBtn.addEventListener(
+    "click",
+    async () => {
+
+      welcome.style.display = "none";
+
+      /*
+         La primera canción se elige
+         ALEATORIAMENTE.
+      */
+
+      randomSong();
+
+      await playMusic();
+
+    }
   );
 
 }
 
 
 /* =====================================================
-   BOTON ENTRAR
-   ===================================================== */
-
-enterBtn.addEventListener(
-  "click",
-  async () => {
-
-    welcome.style.display =
-      "none";
-
-    /*
-       Elegimos una canción aleatoria
-       cuando entra a la página.
-    */
-
-    randomSong();
-
-    await playMusic();
-
-  }
-);
-
-
-/* =====================================================
    PLAY / PAUSA
    ===================================================== */
 
-playBtn.addEventListener(
-  "click",
-  async () => {
+if (playBtn) {
 
-    if (audio.paused) {
+  playBtn.addEventListener(
+    "click",
+    async () => {
 
-      await playMusic();
+      if (audio.paused) {
 
-    } else {
+        await playMusic();
 
-      pauseMusic();
+      } else {
+
+        pauseMusic();
+
+      }
 
     }
+  );
 
-  }
-);
+}
 
 
 /* =====================================================
@@ -274,12 +271,14 @@ audio.addEventListener(
   "error",
   () => {
 
-    playBtn.textContent =
-      "▶";
-
-    player.classList.remove(
-      "playing"
+    console.error(
+      "No se pudo cargar:",
+      audio.src
     );
+
+    playBtn.textContent = "▶";
+
+    player.classList.remove("playing");
 
   }
 );
@@ -290,34 +289,19 @@ audio.addEventListener(
    ===================================================== */
 
 const addNoteBtn =
-  document.getElementById(
-    "addNoteBtn"
-  );
+  document.getElementById("addNoteBtn");
 
 const notesContainer =
-  document.getElementById(
-    "notesContainer"
-  );
+  document.getElementById("notesContainer");
 
 const noteNameInput =
-  document.getElementById(
-    "noteName"
-  );
+  document.getElementById("noteName");
 
 const noteTextInput =
-  document.getElementById(
-    "noteText"
-  );
+  document.getElementById("noteText");
 
 const toggleNotesBtn =
-  document.getElementById(
-    "toggleNotesBtn"
-  );
-
-const notesSidebar =
-  document.getElementById(
-    "notesSidebar"
-  );
+  document.getElementById("toggleNotesBtn");
 
 
 /* =====================================================
@@ -326,15 +310,16 @@ const notesSidebar =
 
 function loadNotes() {
 
+  if (!notesContainer) {
+    return;
+  }
+
   const notes =
     JSON.parse(
-      localStorage.getItem(
-        "migueNotes"
-      ) || "[]"
+      localStorage.getItem("migueNotes") || "[]"
     );
 
-  notesContainer.innerHTML =
-    "";
+  notesContainer.innerHTML = "";
 
   notes.forEach(
     (note, index) => {
@@ -362,33 +347,25 @@ function createNoteElement(
 ) {
 
   const noteEl =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
-  noteEl.className =
-    "sticky-note";
+  noteEl.className = "sticky-note";
 
 
   const deleteButton =
-    document.createElement(
-      "button"
-    );
+    document.createElement("button");
 
   deleteButton.className =
     "sticky-note-delete";
 
-  deleteButton.textContent =
-    "✕";
+  deleteButton.textContent = "✕";
 
   deleteButton.title =
     "Eliminar nota";
 
 
   const nameElement =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
   nameElement.className =
     "sticky-note-name";
@@ -398,9 +375,7 @@ function createNoteElement(
 
 
   const textElement =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
   textElement.className =
     "sticky-note-text";
@@ -409,17 +384,11 @@ function createNoteElement(
     text;
 
 
-  noteEl.appendChild(
-    deleteButton
-  );
+  noteEl.appendChild(deleteButton);
 
-  noteEl.appendChild(
-    nameElement
-  );
+  noteEl.appendChild(nameElement);
 
-  noteEl.appendChild(
-    textElement
-  );
+  noteEl.appendChild(textElement);
 
 
   deleteButton.addEventListener(
@@ -432,9 +401,7 @@ function createNoteElement(
   );
 
 
-  notesContainer.appendChild(
-    noteEl
-  );
+  notesContainer.appendChild(noteEl);
 
 }
 
@@ -444,6 +411,10 @@ function createNoteElement(
    ===================================================== */
 
 function saveNote() {
+
+  if (!noteNameInput || !noteTextInput) {
+    return;
+  }
 
   const name =
     noteNameInput.value.trim() ||
@@ -466,9 +437,7 @@ function saveNote() {
 
   const notes =
     JSON.parse(
-      localStorage.getItem(
-        "migueNotes"
-      ) || "[]"
+      localStorage.getItem("migueNotes") || "[]"
     );
 
 
@@ -487,11 +456,9 @@ function saveNote() {
   );
 
 
-  noteNameInput.value =
-    "";
+  noteNameInput.value = "";
 
-  noteTextInput.value =
-    "";
+  noteTextInput.value = "";
 
 
   loadNotes();
@@ -507,16 +474,11 @@ function deleteNote(index) {
 
   const notes =
     JSON.parse(
-      localStorage.getItem(
-        "migueNotes"
-      ) || "[]"
+      localStorage.getItem("migueNotes") || "[]"
     );
 
 
-  notes.splice(
-    index,
-    1
-  );
+  notes.splice(index, 1);
 
 
   localStorage.setItem(
@@ -545,7 +507,7 @@ if (addNoteBtn) {
 
 
 /* =====================================================
-   CTRL + ENTER
+   CTRL + ENTER PARA GUARDAR
    ===================================================== */
 
 if (noteTextInput) {
@@ -580,42 +542,35 @@ if (toggleNotesBtn) {
     () => {
 
       const form =
-        document.querySelector(
-          ".note-form"
-        );
+        document.querySelector(".note-form");
 
       const hidden =
-        notesContainer.style.display ===
-        "none";
+        notesContainer &&
+        notesContainer.style.display === "none";
 
 
       if (hidden) {
 
-        notesContainer.style.display =
-          "";
+        notesContainer.style.display = "";
 
         if (form) {
           form.style.display = "";
         }
 
-        toggleNotesBtn.textContent =
-          "−";
+        toggleNotesBtn.textContent = "−";
 
         toggleNotesBtn.title =
           "Ocultar notas";
 
       } else {
 
-        notesContainer.style.display =
-          "none";
+        notesContainer.style.display = "none";
 
         if (form) {
-          form.style.display =
-            "none";
+          form.style.display = "none";
         }
 
-        toggleNotesBtn.textContent =
-          "+";
+        toggleNotesBtn.textContent = "+";
 
         toggleNotesBtn.title =
           "Mostrar notas";
