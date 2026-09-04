@@ -1,32 +1,166 @@
-// =====================================================
-// MIGUE HERRERA FANBASE
-// REPRODUCTOR + POST-ITS
-// =====================================================
+/* =====================================================
+   MIGUE HERRERA FANBASE
+   SCRIPT PRINCIPAL
+   ===================================================== */
 
 
-// =====================================================
-// REPRODUCTOR
-// =====================================================
+/* =====================================================
+   PANTALLA DE ENTRADA
+   ===================================================== */
 
-const welcome =
-  document.getElementById("welcome");
-
-const enterBtn =
-  document.getElementById("enterBtn");
-
-const audio =
-  document.getElementById("audio");
-
-const playBtn =
-  document.getElementById("playBtn");
-
-const player =
-  document.querySelector(".music-player");
+const welcome = document.getElementById("welcome");
+const enterBtn = document.getElementById("enterBtn");
 
 
-// =====================================================
-// REPRODUCIR
-// =====================================================
+/* =====================================================
+   REPRODUCTOR DE MUSICA
+   ===================================================== */
+
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("playBtn");
+const nextBtn = document.getElementById("nextBtn");
+const player = document.querySelector(".music-player");
+
+const trackTitle = document.getElementById("trackTitle");
+const trackArtist = document.getElementById("trackArtist");
+
+
+/*
+   IMPORTANTE:
+
+   Todos estos archivos tienen que estar dentro de:
+
+   assets/music/
+
+   EXCEPTO song.mp3, que sigue siendo el Anthem.
+
+   Si preferís meter todos los MP3 directamente dentro
+   de assets/, cambiá "assets/music/" por "assets/".
+*/
+
+const songs = [
+
+  {
+    title: "Migue Herrera Anthem",
+    artist: "sonido oficial de la fanbase",
+    file: "assets/song.mp3"
+  },
+
+  {
+    title: "3SOME - Chzter, FLVCKKA, angely2k",
+    artist: "3SOME",
+    file: "assets/music/3SOME - Chzter, FLVCKKA, angely2k.mp3"
+  },
+
+  {
+    title: "Addison Rae - Diet Pepsi",
+    artist: "Addison Rae",
+    file: "assets/music/Addison Rae - Diet Pepsi (Official Lyric Video).mp3"
+  },
+
+  {
+    title: "Addison Rae - Headphones On",
+    artist: "Addison Rae",
+    file: "assets/music/Addison Rae - Headphones On (Official Lyric Video).mp3"
+  },
+
+  {
+    title: "CHRYSTAL - THE DAYS",
+    artist: "NOTION REMIX",
+    file: "assets/music/CHRYSTAL - THE DAYS (NOTION REMIX).mp3"
+  },
+
+  {
+    title: "Lykke Li - I Follow Rivers",
+    artist: "Lykke Li",
+    file: "assets/music/Lykke Li - I Follow Rivers (Lyrics).mp3"
+  },
+
+  {
+    title: "Mike Posner - I Took A Pill In Ibiza",
+    artist: "Seeb Remix",
+    file: "assets/music/Mike Posner - I Took A Pill In Ibiza (Seeb Remix) (Explicit).mp3"
+  },
+
+  {
+    title: "Rihanna - Man Down",
+    artist: "Rihanna",
+    file: "assets/music/Rihanna - Man Down.mp3"
+  },
+
+  {
+    title: "Rihanna - Rude Boy",
+    artist: "Rihanna",
+    file: "assets/music/Rihanna - Rude Boy.mp3"
+  },
+
+  {
+    title: "si se echa un pedo se lo velo",
+    artist: "sonido de la fanbase",
+    file: "assets/music/si se echa un pedo se lo velo.mp3"
+  }
+
+];
+
+
+/*
+   Elegimos una canción ALEATORIA.
+
+   Esto significa que NO empieza siempre con
+   Migue Herrera Anthem.
+*/
+
+let currentSong = -1;
+
+
+function randomSong() {
+
+  if (songs.length === 0) {
+    return;
+  }
+
+  let randomIndex;
+
+  do {
+
+    randomIndex =
+      Math.floor(
+        Math.random() * songs.length
+      );
+
+  } while (
+    songs.length > 1 &&
+    randomIndex === currentSong
+  );
+
+  currentSong = randomIndex;
+
+  loadSong(currentSong);
+}
+
+
+function loadSong(index) {
+
+  const song = songs[index];
+
+  if (!song) {
+    return;
+  }
+
+  audio.src = song.file;
+
+  trackTitle.textContent =
+    song.title;
+
+  trackArtist.textContent =
+    song.artist;
+
+}
+
+
+/*
+   Reproduce la canción actual.
+*/
 
 async function playMusic() {
 
@@ -51,9 +185,30 @@ async function playMusic() {
 }
 
 
-// =====================================================
-// ENTRAR
-// =====================================================
+/*
+   Pausa.
+*/
+
+function pauseMusic() {
+
+  audio.pause();
+
+  playBtn.textContent =
+    "▶";
+
+  player.classList.remove(
+    "playing"
+  );
+
+}
+
+
+/*
+   Botón ENTER.
+
+   Primero elegimos la canción aleatoria
+   y después intentamos reproducirla.
+*/
 
 enterBtn.addEventListener(
   "click",
@@ -62,15 +217,17 @@ enterBtn.addEventListener(
     welcome.style.display =
       "none";
 
+    randomSong();
+
     await playMusic();
 
   }
 );
 
 
-// =====================================================
-// PLAY / PAUSE
-// =====================================================
+/*
+   Play / pausa
+*/
 
 playBtn.addEventListener(
   "click",
@@ -82,14 +239,7 @@ playBtn.addEventListener(
 
     } else {
 
-      audio.pause();
-
-      playBtn.textContent =
-        "▶";
-
-      player.classList.remove(
-        "playing"
-      );
+      pauseMusic();
 
     }
 
@@ -97,25 +247,65 @@ playBtn.addEventListener(
 );
 
 
-// =====================================================
-// ERROR AUDIO
-// =====================================================
+/*
+   Siguiente canción.
 
-audio.addEventListener(
-  "error",
-  () => {
+   También selecciona aleatoriamente.
+*/
 
-    playBtn.title =
-      "No se encontró assets/song.mp3";
+nextBtn.addEventListener(
+  "click",
+  async () => {
+
+    randomSong();
+
+    await playMusic();
 
   }
 );
 
 
+/*
+   Cuando termina una canción,
+   automáticamente elige otra aleatoria.
+*/
 
-// =====================================================
-// POST-ITS
-// =====================================================
+audio.addEventListener(
+  "ended",
+  async () => {
+
+    randomSong();
+
+    await playMusic();
+
+  }
+);
+
+
+/*
+   Si un archivo no existe,
+   mostramos el nombre en el reproductor
+   pero no rompemos la página.
+*/
+
+audio.addEventListener(
+  "error",
+  () => {
+
+    playBtn.textContent =
+      "▶";
+
+    player.classList.remove(
+      "playing"
+    );
+
+  }
+);
+
+
+/* =====================================================
+   SISTEMA DE POST-ITS
+   ===================================================== */
 
 const addNoteBtn =
   document.getElementById(
@@ -125,6 +315,16 @@ const addNoteBtn =
 const notesContainer =
   document.getElementById(
     "notesContainer"
+  );
+
+const noteNameInput =
+  document.getElementById(
+    "noteName"
+  );
+
+const noteTextInput =
+  document.getElementById(
+    "noteText"
   );
 
 const toggleNotesBtn =
@@ -138,59 +338,25 @@ const notesSidebar =
   );
 
 
-const noteNameInput =
-  document.getElementById(
-    "noteName"
-  );
+/*
+   Cargar notas guardadas.
 
-const noteTextInput =
-  document.getElementById(
-    "noteText"
-  );
-
-
-const STORAGE_KEY =
-  "migueNotes";
-
-
-
-// =====================================================
-// OBTENER NOTAS
-// =====================================================
-
-function getNotes() {
-
-  try {
-
-    return JSON.parse(
-      localStorage.getItem(
-        STORAGE_KEY
-      ) || "[]"
-    );
-
-  } catch (error) {
-
-    return [];
-
-  }
-
-}
-
-
-
-// =====================================================
-// CARGAR NOTAS
-// =====================================================
+   Se utiliza localStorage para que,
+   si volvés a abrir la página en el mismo
+   navegador, sigan apareciendo.
+*/
 
 function loadNotes() {
 
   const notes =
-    getNotes();
-
+    JSON.parse(
+      localStorage.getItem(
+        "migueNotes"
+      ) || "[]"
+    );
 
   notesContainer.innerHTML =
     "";
-
 
   notes.forEach(
     (note, index) => {
@@ -207,10 +373,9 @@ function loadNotes() {
 }
 
 
-
-// =====================================================
-// CREAR POST-IT
-// =====================================================
+/*
+   Crear una nota.
+*/
 
 function createNoteElement(
   name,
@@ -218,16 +383,35 @@ function createNoteElement(
   index
 ) {
 
-  const note =
+  const noteEl =
     document.createElement(
       "div"
     );
 
-  note.className =
+  noteEl.className =
     "sticky-note";
 
 
-  // NOMBRE
+  /*
+     Usamos textContent en vez de
+     meter directamente el texto
+     dentro de innerHTML.
+  */
+
+  const deleteButton =
+    document.createElement(
+      "button"
+    );
+
+  deleteButton.className =
+    "sticky-note-delete";
+
+  deleteButton.textContent =
+    "✕";
+
+  deleteButton.title =
+    "Eliminar nota";
+
 
   const nameElement =
     document.createElement(
@@ -241,8 +425,6 @@ function createNoteElement(
     name || "Anónimo";
 
 
-  // TEXTO
-
   const textElement =
     document.createElement(
       "div"
@@ -255,24 +437,17 @@ function createNoteElement(
     text;
 
 
-  // BOTON X
+  noteEl.appendChild(
+    deleteButton
+  );
 
-  const deleteButton =
-    document.createElement(
-      "button"
-    );
+  noteEl.appendChild(
+    nameElement
+  );
 
-  deleteButton.className =
-    "sticky-note-delete";
-
-  deleteButton.type =
-    "button";
-
-  deleteButton.textContent =
-    "✕";
-
-  deleteButton.title =
-    "Borrar nota";
+  noteEl.appendChild(
+    textElement
+  );
 
 
   deleteButton.addEventListener(
@@ -285,36 +460,22 @@ function createNoteElement(
   );
 
 
-  note.appendChild(
-    deleteButton
-  );
-
-  note.appendChild(
-    nameElement
-  );
-
-  note.appendChild(
-    textElement
-  );
-
-
   notesContainer.appendChild(
-    note
+    noteEl
   );
 
 }
 
 
-
-// =====================================================
-// GUARDAR NOTA
-// =====================================================
+/*
+   Guardar una nueva nota.
+*/
 
 function saveNote() {
 
   const name =
-    noteNameInput.value.trim();
-
+    noteNameInput.value.trim() ||
+    "Anónimo";
 
   const text =
     noteTextInput.value.trim();
@@ -326,35 +487,29 @@ function saveNote() {
       "Escribí algo en la nota 😤"
     );
 
-    noteTextInput.focus();
-
     return;
 
   }
 
 
   const notes =
-    getNotes();
+    JSON.parse(
+      localStorage.getItem(
+        "migueNotes"
+      ) || "[]"
+    );
 
 
   notes.push({
-
-    name:
-      name || "Anónimo",
-
-    text:
-      text
-
+    name: name,
+    text: text
   });
 
 
   localStorage.setItem(
-    STORAGE_KEY,
+    "migueNotes",
     JSON.stringify(notes)
   );
-
-
-  loadNotes();
 
 
   noteNameInput.value =
@@ -364,21 +519,23 @@ function saveNote() {
     "";
 
 
-
-  noteTextInput.focus();
+  loadNotes();
 
 }
 
 
-
-// =====================================================
-// BORRAR NOTA
-// =====================================================
+/*
+   Eliminar una nota.
+*/
 
 function deleteNote(index) {
 
   const notes =
-    getNotes();
+    JSON.parse(
+      localStorage.getItem(
+        "migueNotes"
+      ) || "[]"
+    );
 
 
   notes.splice(
@@ -388,7 +545,7 @@ function deleteNote(index) {
 
 
   localStorage.setItem(
-    STORAGE_KEY,
+    "migueNotes",
     JSON.stringify(notes)
   );
 
@@ -398,10 +555,9 @@ function deleteNote(index) {
 }
 
 
-
-// =====================================================
-// PEGAR NOTITA
-// =====================================================
+/*
+   Botón PEGAR NOTITA
+*/
 
 addNoteBtn.addEventListener(
   "click",
@@ -409,50 +565,9 @@ addNoteBtn.addEventListener(
 );
 
 
-
-// =====================================================
-// OCULTAR NOTAS
-// =====================================================
-
-toggleNotesBtn.addEventListener(
-  "click",
-  () => {
-
-    notesSidebar.classList.toggle(
-      "notes-hidden"
-    );
-
-
-    if (
-      notesSidebar.classList.contains(
-        "notes-hidden"
-      )
-    ) {
-
-      toggleNotesBtn.textContent =
-        "+";
-
-      toggleNotesBtn.title =
-        "Mostrar notas";
-
-    } else {
-
-      toggleNotesBtn.textContent =
-        "−";
-
-      toggleNotesBtn.title =
-        "Ocultar notas";
-
-    }
-
-  }
-);
-
-
-
-// =====================================================
-// CTRL + ENTER PARA PUBLICAR
-// =====================================================
+/*
+   CTRL + ENTER también guarda.
+*/
 
 noteTextInput.addEventListener(
   "keydown",
@@ -471,9 +586,58 @@ noteTextInput.addEventListener(
 );
 
 
+/*
+   Ocultar / mostrar las notitas.
+*/
 
-// =====================================================
-// CARGAR NOTAS AL ABRIR
-// =====================================================
+toggleNotesBtn.addEventListener(
+  "click",
+  () => {
+
+    const hidden =
+      notesContainer.style.display ===
+      "none";
+
+    if (hidden) {
+
+      notesContainer.style.display =
+        "";
+
+      document.querySelector(
+        ".note-form"
+      ).style.display =
+        "";
+
+      toggleNotesBtn.textContent =
+        "−";
+
+      toggleNotesBtn.title =
+        "Ocultar notas";
+
+    } else {
+
+      notesContainer.style.display =
+        "none";
+
+      document.querySelector(
+        ".note-form"
+      ).style.display =
+        "none";
+
+      toggleNotesBtn.textContent =
+        "+";
+
+      toggleNotesBtn.title =
+        "Mostrar notas";
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   INICIAR
+   ===================================================== */
 
 loadNotes();
