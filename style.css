@@ -231,8 +231,7 @@ textarea {
 .live-post {
   width: min(650px, 94vw);
 
-  margin:
-    15px auto 22px;
+  margin: 15px auto 22px;
 
   padding: 15px;
 
@@ -248,12 +247,16 @@ textarea {
 
   backdrop-filter:
     blur(8px);
+
+  position: relative;
+  z-index: 5;
 }
 
 .live-header {
   text-align: center;
 
   padding-bottom: 10px;
+
   margin-bottom: 10px;
 
   border-bottom:
@@ -265,6 +268,7 @@ textarea {
   color: #ff8cdf;
 
   font-size: 16px;
+
   font-weight: 1000;
 
   letter-spacing: 1px;
@@ -280,14 +284,23 @@ textarea {
   text-transform: uppercase;
 }
 
+
+/* CADA TRANSMISIÓN */
+
 .live-stream {
-  display: flex;
+  display: grid;
+
+  grid-template-columns:
+    42px minmax(0, 1fr) auto auto;
 
   align-items: center;
 
   gap: 10px;
 
+  width: 100%;
+
   padding: 11px;
+
   margin-top: 9px;
 
   background:
@@ -297,7 +310,10 @@ textarea {
     1px solid
     rgba(255,55,200,.35);
 
-  transition: .15s;
+  transition:
+    .15s;
+
+  min-width: 0;
 }
 
 .live-stream:hover {
@@ -314,6 +330,7 @@ textarea {
 
 .live-avatar {
   width: 42px;
+
   height: 42px;
 
   min-width: 42px;
@@ -321,6 +338,7 @@ textarea {
   border-radius: 50%;
 
   display: grid;
+
   place-items: center;
 
   background:
@@ -333,22 +351,27 @@ textarea {
   color: white;
 
   font-weight: 1000;
+
   font-size: 16px;
 }
 
 .live-info {
-  flex: 1;
   min-width: 0;
+
+  overflow: hidden;
 }
 
 .live-info strong {
   display: block;
 
   color: white;
+
   font-size: 14px;
 
   overflow: hidden;
+
   text-overflow: ellipsis;
+
   white-space: nowrap;
 }
 
@@ -362,7 +385,9 @@ textarea {
   margin-top: 3px;
 
   overflow: hidden;
+
   text-overflow: ellipsis;
+
   white-space: nowrap;
 }
 
@@ -370,6 +395,7 @@ textarea {
   color: #ff4d76;
 
   font-size: 10px;
+
   font-weight: 1000;
 
   white-space: nowrap;
@@ -392,6 +418,7 @@ textarea {
   text-decoration: none;
 
   font-size: 10px;
+
   font-weight: 1000;
 
   white-space: nowrap;
@@ -399,7 +426,8 @@ textarea {
   border:
     1px solid #ff8cdf;
 
-  transition: .15s;
+  transition:
+    .15s;
 }
 
 .live-button:hover {
@@ -424,6 +452,7 @@ textarea {
   letter-spacing: 1px;
 
   margin-top: 11px;
+
   padding-top: 9px;
 
   border-top:
@@ -441,6 +470,120 @@ textarea {
   }
 }
 
+
+/* =====================================================
+   TRANSMISIONES EN CELULAR
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+  .live-post {
+    width:
+      calc(100% - 20px);
+
+    padding:
+      12px;
+  }
+
+  .live-stream {
+    display: grid !important;
+
+    grid-template-columns:
+      42px minmax(0, 1fr);
+
+    grid-template-rows:
+      auto auto;
+
+    gap:
+      6px 9px;
+
+    padding:
+      10px;
+  }
+
+  .live-avatar {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .live-info {
+    grid-column: 2;
+    grid-row: 1;
+
+    min-width:
+      0 !important;
+
+    width:
+      100%;
+  }
+
+  .live-info strong {
+    font-size:
+      13px;
+  }
+
+  .live-info span {
+    font-size:
+      10px;
+  }
+
+  .live-status {
+    grid-column:
+      2;
+
+    grid-row:
+      2;
+
+    width:
+      fit-content;
+
+    margin:
+      0;
+  }
+
+  .live-button {
+    grid-column:
+      2;
+
+    grid-row:
+      3;
+
+    width:
+      fit-content;
+
+    margin:
+      2px 0 0;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .live-stream {
+    align-items:
+      center;
+  }
+
+  .live-info strong {
+    font-size:
+      13px;
+  }
+
+  .live-info span {
+    font-size:
+      10px;
+  }
+
+  .live-button {
+    padding:
+      7px 9px;
+
+    font-size:
+      9px;
+  }
+
+}
 
 /* =====================================================
    FEED
