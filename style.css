@@ -3470,3 +3470,207 @@ footer {
   }
 
 }
+/* =====================================================
+   BUILDS / CHAMPIONS
+   ===================================================== */
+
+.champions-post {
+  border-color: rgba(255, 55, 200, .8);
+}
+
+.champions-header {
+  text-align: center;
+  padding: 10px 0 18px;
+}
+
+.champions-kicker {
+  display: inline-block;
+
+  color: #09020b;
+
+  background: #ff37c8;
+
+  padding: 6px 10px;
+
+  font-size: 11px;
+
+  font-weight: 1000;
+
+  letter-spacing: 2px;
+
+  box-shadow:
+    3px 3px 0 #34f5ff;
+}
+
+.champions-header h2 {
+  margin: 17px 0 6px;
+
+  font-size:
+    clamp(23px, 6vw, 35px);
+
+  text-shadow:
+    0 0 12px
+    rgba(255,55,200,.55);
+}
+
+.champions-header p {
+  color: #b9a8c0;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+.champion-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.champion-card {
+  display: block;
+
+  padding: 14px;
+
+  text-decoration: none;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,55,200,.14),
+      rgba(52,245,255,.06)
+    );
+
+  border:
+    1px solid
+    rgba(255,55,200,.48);
+
+  transition:
+    transform .15s,
+    border-color .15s,
+    box-shadow .15s;
+}
+
+.champion-card:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    #34f5ff;
+
+  box-shadow:
+    0 0 17px
+    rgba(255,55,200,.28);
+}
+
+.champion-card strong {
+  display: block;
+
+  color: #ff8cdf;
+
+  font-size: 20px;
+
+  margin-bottom: 4px;
+}
+
+.champion-card > span {
+  display: block;
+
+  color: #9f91a7;
+
+  font-size: 11px;
+
+  margin-bottom: 10px;
+}
+
+.champion-card small {
+  display: block;
+
+  font-size: 10px;
+
+  line-height: 1.45;
+
+  color: #c9bdcf;
+
+  margin-top: 5px;
+}
+
+.champion-card small b {
+  color: #34f5ff;
+}
+
+.champion-card em {
+  display: block;
+
+  margin-top: 11px;
+
+  padding: 7px 8px;
+
+  text-align: center;
+
+  background: #ff37c8;
+
+  color: #120612;
+
+  font-size: 10px;
+
+  font-weight: 1000;
+
+  font-style: normal;
+
+  letter-spacing: 1px;
+}
+
+.champions-footer {
+  margin-top: 13px;
+
+  padding: 9px;
+
+  text-align: center;
+
+  border:
+    1px dashed
+    rgba(52,245,255,.45);
+
+  color: #9fecef;
+
+  font-size: 9px;
+}
+
+.champion-card .matchup-win {
+  color: #ff8cdf;
+  font-weight: 1000;
+}
+
+.champion-card .matchup-loss {
+  color: #34f5ff;
+  font-weight: 1000;
+}
+
+
+/* BUILDS EN CELULAR */
+
+@media (max-width: 560px) {
+
+  .champion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .champion-card {
+    padding: 13px;
+  }
+
+  .champion-card strong {
+    font-size: 18px;
+  }
+
+  .champion-card small {
+    font-size: 10px;
+  }
+
+}
