@@ -50,7 +50,6 @@ body {
     center / cover fixed;
 }
 
-
 .scanlines {
   position: fixed;
   inset: 0;
@@ -90,7 +89,6 @@ body {
   padding: 20px;
 }
 
-
 .welcome-box {
   width: min(700px, 95vw);
 
@@ -107,7 +105,6 @@ body {
     0 0 35px rgba(255,55,200,.45);
 }
 
-
 .welcome-box p {
   color: var(--cyan);
 
@@ -115,7 +112,6 @@ body {
 
   font-weight: 800;
 }
-
 
 .welcome-box small {
   display: block;
@@ -125,7 +121,6 @@ body {
   opacity: .7;
 }
 
-
 .title-gif {
   width: min(994px, 100%);
 
@@ -134,7 +129,6 @@ body {
   image-rendering: auto;
 }
 
-
 .main-title {
   filter:
     drop-shadow(
@@ -142,7 +136,6 @@ body {
       rgba(255, 45, 220, .55)
     );
 }
-
 
 #enterBtn {
   border: 0;
@@ -165,7 +158,6 @@ body {
   transition: .15s;
 }
 
-
 #enterBtn:hover {
   transform:
     translate(3px, 3px);
@@ -186,7 +178,6 @@ body {
 
   text-align: center;
 }
-
 
 .marquee {
   border-top:
@@ -211,7 +202,6 @@ body {
     pulse 2s infinite alternate;
 }
 
-
 .subtitle {
   margin-top: 4px;
 
@@ -225,7 +215,7 @@ body {
 
 
 /* =====================================================
-   TRANSMISIONES
+   TRANSMISIONES EN VIVO
    ===================================================== */
 
 .live-post {
@@ -250,7 +240,6 @@ body {
     blur(8px);
 }
 
-
 .live-header {
   text-align: center;
 
@@ -263,7 +252,6 @@ body {
     rgba(255,55,200,.45);
 }
 
-
 .live-title {
   color: #ff8cdf;
 
@@ -274,7 +262,6 @@ body {
   letter-spacing: 1px;
 }
 
-
 .live-subtitle {
   color: #b9a8c0;
 
@@ -284,7 +271,6 @@ body {
 
   text-transform: uppercase;
 }
-
 
 .live-stream {
   display: flex;
@@ -307,7 +293,6 @@ body {
   transition: .15s;
 }
 
-
 .live-stream:hover {
   border-color:
     var(--pink);
@@ -319,7 +304,6 @@ body {
   transform:
     translateY(-1px);
 }
-
 
 .live-avatar {
   width: 42px;
@@ -347,13 +331,11 @@ body {
   font-size: 16px;
 }
 
-
 .live-info {
   flex: 1;
 
   min-width: 0;
 }
-
 
 .live-info strong {
   display: block;
@@ -362,7 +344,6 @@ body {
 
   font-size: 14px;
 }
-
 
 .live-info span {
   display: block;
@@ -373,7 +354,6 @@ body {
 
   margin-top: 3px;
 }
-
 
 .live-status {
   color: #ff4d76;
@@ -387,7 +367,6 @@ body {
   animation:
     livePulse 1s infinite alternate;
 }
-
 
 .live-button {
   display: inline-block;
@@ -414,7 +393,6 @@ body {
   transition: .15s;
 }
 
-
 .live-button:hover {
   background:
     #ff8cdf;
@@ -426,7 +404,6 @@ body {
     0 0 12px
     rgba(255,55,200,.5);
 }
-
 
 .live-note {
   text-align: center;
@@ -446,9 +423,7 @@ body {
     rgba(255,55,200,.25);
 }
 
-
 @keyframes livePulse {
-
   from {
     opacity: .45;
   }
@@ -456,7 +431,6 @@ body {
   to {
     opacity: 1;
   }
-
 }
 
 
@@ -470,7 +444,6 @@ body {
   margin:
     0 auto 120px;
 }
-
 
 .post {
   margin: 22px 0;
@@ -492,7 +465,6 @@ body {
     blur(8px);
 }
 
-
 .post-head {
   display: flex;
 
@@ -502,7 +474,6 @@ body {
 
   margin-bottom: 13px;
 }
-
 
 .avatar {
   width: 40px;
@@ -528,7 +499,6 @@ body {
   font-size: 12px;
 }
 
-
 .avatar.red {
   background:
     linear-gradient(
@@ -538,11 +508,9 @@ body {
     );
 }
 
-
 .post-head strong {
   display: block;
 }
-
 
 .post-head span {
   display: block;
@@ -553,7 +521,6 @@ body {
 
   margin-top: 2px;
 }
-
 
 .dots {
   margin-left: auto;
@@ -567,13 +534,11 @@ body {
   cursor: pointer;
 }
 
-
 .caption {
   line-height: 1.45;
 
   margin-bottom: 14px;
 }
-
 
 .video-wrap {
   width: 100%;
@@ -586,14 +551,12 @@ body {
     1px solid #44264d;
 }
 
-
 .video-wrap iframe {
   width: 100%;
   height: 100%;
 
   border: 0;
 }
-
 
 .actions {
   display: flex;
@@ -606,7 +569,6 @@ body {
     1px solid #2d2032;
 }
 
-
 .actions button {
   border: 0;
 
@@ -617,18 +579,20 @@ body {
   padding: 8px 11px;
 
   cursor: pointer;
-}
 
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
+}
 
 .actions button:hover {
   color: var(--pink);
 }
 
-
 .comments {
   padding-top: 7px;
 }
-
 
 .comment {
   padding: 7px 2px;
@@ -638,20 +602,17 @@ body {
   line-height: 1.35;
 }
 
-
 .comment b {
   color: #ff86df;
 
   margin-right: 5px;
 }
 
-
 .defensa {
   color: var(--cyan);
 
   font-weight: 900;
 }
-
 
 .comment-box {
   display: flex;
@@ -660,7 +621,6 @@ body {
 
   margin-top: 10px;
 }
-
 
 .comment-box input {
   min-width: 0;
@@ -675,8 +635,12 @@ body {
   padding: 10px;
 
   color: white;
-}
 
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
+}
 
 .comment-box button {
   border: 0;
@@ -686,14 +650,17 @@ body {
   color: #9a8da0;
 
   padding: 0 12px;
-}
 
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
+}
 
 .controversy {
   border-color:
     rgba(255,65,65,.65);
 }
-
 
 .controversy-banner {
   background:
@@ -718,7 +685,6 @@ body {
     alert 1s infinite alternate;
 }
 
-
 .case-photo {
   width: 100%;
 
@@ -734,7 +700,6 @@ body {
     rgba(255,48,76,.25);
 }
 
-
 .case-photo img {
   display: block;
 
@@ -744,13 +709,11 @@ body {
 }
 
 
-
 /* =====================================================
    POST-ITS
    ===================================================== */
 
 .sticky-notes-sidebar {
-
   position: fixed;
 
   right: 15px;
@@ -767,9 +730,7 @@ body {
   pointer-events: auto;
 }
 
-
 .sticky-header {
-
   display: flex;
 
   align-items: center;
@@ -790,9 +751,7 @@ body {
   border-radius: 0;
 }
 
-
 .sticky-header h3 {
-
   margin: 0;
 
   font-size: 16px;
@@ -804,9 +763,7 @@ body {
     rgba(255,55,200,.4);
 }
 
-
 .notes-toggle {
-
   width: 30px;
 
   height: 30px;
@@ -823,11 +780,14 @@ body {
   font-size: 18px;
 
   cursor: pointer;
+
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
 }
 
-
 .notes-toggle:hover {
-
   background:
     var(--pink);
 
@@ -836,10 +796,11 @@ body {
 }
 
 
-/* FORMULARIO */
+/* =====================================================
+   FORMULARIO DE NOTITAS
+   ===================================================== */
 
 .note-form {
-
   padding: 11px;
 
   margin-bottom: 12px;
@@ -850,42 +811,48 @@ body {
   border:
     1px solid
     rgba(255,55,200,.4);
-}
 
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
+}
 
 .note-input-row {
-
   display: flex;
 
-  align-items: center;
+  flex-direction: column;
 
-  gap: 7px;
+  gap: 5px;
 
-  margin-bottom: 8px;
+  margin-bottom: 9px;
 }
 
-
 .note-input-row label {
+  width: auto;
 
-  width: 48px;
-
-  min-width: 48px;
+  min-width: 0;
 
   color:
     #ff8cdf;
 
-  font-size: 9px;
+  font-size: 11px;
 
   font-weight: 1000;
-}
 
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
+}
 
 .note-input-row input,
 .note-input-row textarea {
-
   width: 100%;
 
   min-width: 0;
+
+  box-sizing: border-box;
 
   background:
     #100a14;
@@ -903,15 +870,15 @@ body {
     "Comic Sans",
     cursive;
 
-  font-size: 11px;
+  font-size: 12px;
 
   outline: none;
-}
 
+  border-radius: 0;
+}
 
 .note-input-row input:focus,
 .note-input-row textarea:focus {
-
   border-color:
     var(--pink);
 
@@ -920,17 +887,13 @@ body {
     rgba(255,55,200,.25);
 }
 
-
 .note-input-row textarea {
-
   min-height: 55px;
 
   resize: vertical;
 }
 
-
 .add-note-submit {
-
   width: 100%;
 
   padding: 9px;
@@ -957,9 +920,7 @@ body {
   transition: .15s;
 }
 
-
 .add-note-submit:hover {
-
   background:
     #ff8cdf;
 
@@ -969,10 +930,11 @@ body {
 }
 
 
-/* CONTENEDOR */
+/* =====================================================
+   CONTENEDOR DE NOTITAS
+   ===================================================== */
 
 .sticky-notes-container {
-
   display: flex;
 
   flex-direction: column;
@@ -984,24 +946,19 @@ body {
 
   overflow-y: auto;
 
-  padding: 3px 5px 10px 3px;
+  padding:
+    3px 5px 10px 3px;
 }
 
-
 .sticky-notes-container::-webkit-scrollbar {
-
   width: 6px;
 }
 
-
 .sticky-notes-container::-webkit-scrollbar-track {
-
   background: transparent;
 }
 
-
 .sticky-notes-container::-webkit-scrollbar-thumb {
-
   background:
     rgba(255,55,200,.4);
 
@@ -1009,10 +966,11 @@ body {
 }
 
 
-/* LA NOTITA */
+/* =====================================================
+   POST-IT INDIVIDUAL
+   ===================================================== */
 
 .sticky-note {
-
   position: relative;
 
   min-height: 105px;
@@ -1041,25 +999,26 @@ body {
     noteAppear .3s ease-out;
 
   flex-shrink: 0;
+
+  overflow-wrap: anywhere;
+
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
 }
 
-
 .sticky-note:nth-child(even) {
-
   transform:
     rotate(1deg);
 }
 
-
 .sticky-note:nth-child(3n) {
-
   transform:
     rotate(-.5deg);
 }
 
-
 .sticky-note-name {
-
   color:
     #6b2d54;
 
@@ -1080,11 +1039,14 @@ body {
 
   white-space:
     nowrap;
+
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
 }
 
-
 .sticky-note-text {
-
   margin-top:
     9px;
 
@@ -1109,9 +1071,7 @@ body {
     pre-wrap;
 }
 
-
 .sticky-note-delete {
-
   position:
     absolute;
 
@@ -1138,11 +1098,14 @@ body {
 
   padding:
     0;
+
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
 }
 
-
 .sticky-note-delete:hover {
-
   color:
     #ff1493;
 
@@ -1150,37 +1113,29 @@ body {
     scale(1.15);
 }
 
-
 @keyframes noteAppear {
-
   from {
-
     opacity: 0;
 
     transform:
       scale(.8)
       rotate(5deg);
-
   }
 
   to {
-
     opacity: 1;
 
     transform:
       rotate(-1deg);
-
   }
-
 }
 
 
 /* =====================================================
-   REPRODUCTOR
+   REPRODUCTOR DE MUSICA
    ===================================================== */
 
 .music-player {
-
   position: fixed;
 
   z-index: 50;
@@ -1201,7 +1156,8 @@ body {
 
   gap: 12px;
 
-  padding: 10px 13px;
+  padding:
+    10px 13px;
 
   background:
     rgba(8,3,12,.96);
@@ -1217,34 +1173,26 @@ body {
     blur(10px);
 }
 
-
 .disc {
-
   font-size: 28px;
 
   animation:
     spin 3s linear infinite paused;
 }
 
-
 .music-player.playing .disc {
-
   animation-play-state:
     running;
 }
 
-
 .track-info {
-
   flex: 1;
 
   min-width: 0;
 }
 
-
 .track-info b,
 .track-info span {
-
   display: block;
 
   white-space:
@@ -1255,18 +1203,19 @@ body {
 
   text-overflow:
     ellipsis;
+
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
 }
 
-
 .track-info b {
-
   font-size:
     14px;
 }
 
-
 .track-info span {
-
   color:
     #9e8da5;
 
@@ -1277,10 +1226,8 @@ body {
     2px;
 }
 
-
 #playBtn,
 .next-track {
-
   border:
     1px solid var(--cyan);
 
@@ -1301,12 +1248,15 @@ body {
 
   font-size:
     14px;
-}
 
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
+}
 
 #playBtn:hover,
 .next-track:hover {
-
   background:
     var(--cyan);
 
@@ -1314,9 +1264,7 @@ body {
     #09020b;
 }
 
-
 .equalizer {
-
   display:
     flex;
 
@@ -1330,9 +1278,7 @@ body {
     3px;
 }
 
-
 .equalizer i {
-
   width:
     3px;
 
@@ -1346,30 +1292,24 @@ body {
     block;
 }
 
-
 .music-player.playing
 .equalizer i {
-
   animation:
     eq .5s infinite
     alternate ease-in-out;
 }
 
-
 .equalizer i:nth-child(2) {
   animation-delay: .1s;
 }
-
 
 .equalizer i:nth-child(3) {
   animation-delay: .2s;
 }
 
-
 .equalizer i:nth-child(4) {
   animation-delay: .3s;
 }
-
 
 .equalizer i:nth-child(5) {
   animation-delay: .4s;
@@ -1377,11 +1317,10 @@ body {
 
 
 /* =====================================================
-   GIFS
+   GIFS DECORATIVOS
    ===================================================== */
 
 .floating-gif {
-
   position:
     fixed;
 
@@ -1404,24 +1343,20 @@ body {
     );
 }
 
-
 .gif1 {
   top: 14%;
   left: 2%;
 }
-
 
 .gif2 {
   top: 45%;
   right: 2%;
 }
 
-
 .gif3 {
   bottom: 20%;
   left: 4%;
 }
-
 
 .gif4 {
   top: 72%;
@@ -1434,7 +1369,6 @@ body {
    ===================================================== */
 
 footer {
-
   text-align:
     center;
 
@@ -1446,6 +1380,11 @@ footer {
 
   padding:
     20px 10px 110px;
+
+  font-family:
+    "Comic Sans MS",
+    "Comic Sans",
+    cursive;
 }
 
 
@@ -1454,17 +1393,13 @@ footer {
    ===================================================== */
 
 @keyframes spin {
-
   to {
     transform:
       rotate(360deg);
   }
-
 }
 
-
 @keyframes pulse {
-
   from {
     opacity: .65;
   }
@@ -1472,12 +1407,9 @@ footer {
   to {
     opacity: 1;
   }
-
 }
 
-
 @keyframes alert {
-
   from {
     filter:
       brightness(.8);
@@ -1487,17 +1419,13 @@ footer {
     filter:
       brightness(1.35);
   }
-
 }
 
-
 @keyframes eq {
-
   to {
     height:
       24px;
   }
-
 }
 
 
@@ -1508,13 +1436,11 @@ footer {
 @media (max-width: 1200px) {
 
   .sticky-notes-sidebar {
-
     right:
       10px;
 
     width:
       250px;
-
   }
 
 }
@@ -1523,12 +1449,17 @@ footer {
 @media (max-width: 900px) {
 
   .sticky-notes-sidebar {
-
     position:
-      static;
+      relative;
+
+    top:
+      auto;
+
+    right:
+      auto;
 
     width:
-      min(650px, 94vw);
+      min(650px, calc(100% - 30px));
 
     max-height:
       none;
@@ -1536,11 +1467,11 @@ footer {
     margin:
       20px auto;
 
+    z-index:
+      40;
   }
 
-
   .sticky-notes-container {
-
     flex-direction:
       row;
 
@@ -1550,270 +1481,28 @@ footer {
     max-height:
       400px;
 
+    overflow-y:
+      auto;
   }
 
-
   .sticky-note {
-
     flex:
       0 1
       calc(50% - 6px);
 
     min-width:
       140px;
+  }
 
+  .live-post {
+    width:
+      min(650px, 94vw);
   }
 
 }
 
 
 @media (max-width: 700px) {
-
-  .floating-gif {
-
-    max-width:
-      75px;
-
-    max-height:
-      75px;
-
-    opacity:
-      .65;
-
-  }
-
-
-  .site-header {
-
-    margin-top:
-      15px;
-
-  }
-
-
-  .post {
-
-    padding:
-      12px;
-
-  }
-
-
-  .music-player {
-
-    bottom:
-      8px;
-
-    gap:
-      7px;
-
-  }
-
-
-  .next-track {
-
-    display:
-      none;
-
-  }
-
-
-  .sticky-note {
-
-    flex:
-      0 1
-      calc(50% - 5px);
-
-    min-height:
-      90px;
-
-    min-width:
-      120px;
-
-  }
-
-
-  .live-stream {
-
-    flex-wrap:
-      wrap;
-
-  }
-
-
-  .live-status {
-
-    margin-left:
-      52px;
-
-  }
-
-
-  .live-button {
-
-    margin-left:
-      auto;
-
-  }
-
-}
-/* =====================================================
-   NOTITAS COMPARTIDAS - SUPABASE
-   ===================================================== */
-
-.sticky-notes-sidebar,
-.sticky-notes-sidebar input,
-.sticky-notes-sidebar textarea,
-.sticky-notes-sidebar button,
-.sticky-note,
-.sticky-note-name,
-.sticky-note-text,
-.sticky-header h3,
-.note-form,
-.note-form label {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
-}
-
-
-/* Evita que el formulario se vaya abajo */
-
-.sticky-notes-sidebar {
-  position: fixed;
-  right: 18px;
-  top: 230px;
-  width: 280px;
-  max-height: calc(100vh - 250px);
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-
-/* Formulario */
-
-.note-form {
-  padding: 10px;
-}
-
-
-.note-input-row {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: 9px;
-}
-
-
-.note-input-row label {
-  font-size: 11px;
-  font-weight: bold;
-}
-
-
-.note-input-row input,
-.note-input-row textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 8px;
-}
-
-
-/* Botón */
-
-.add-note-submit {
-  width: 100%;
-  cursor: pointer;
-}
-
-
-/* Contenedor */
-
-.sticky-notes-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 12px 5px 30px;
-}
-
-
-/* POST-IT */
-
-.sticky-note {
-  position: relative;
-  min-height: 105px;
-  padding: 22px 18px 18px;
-  box-sizing: border-box;
-
-  background-image: url("assets/postit.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-
-  color: #3d1735;
-
-  transform: rotate(-1deg);
-
-  overflow-wrap: anywhere;
-}
-
-
-.sticky-note:nth-child(even) {
-  transform: rotate(1deg);
-}
-
-
-.sticky-note-name {
-  font-weight: bold;
-  font-size: 13px;
-  margin-bottom: 8px;
-}
-
-
-.sticky-note-text {
-  font-size: 13px;
-  line-height: 1.35;
-}
-
-
-/* X */
-
-.sticky-note-delete {
-  position: absolute;
-  top: 7px;
-  right: 8px;
-
-  background: transparent;
-  border: 0;
-
-  cursor: pointer;
-
-  font-size: 15px;
-}
-
-
-/* =====================================================
-   MOBILE
-   ===================================================== */
-
-@media (max-width: 900px) {
-
-  .sticky-notes-sidebar {
-
-    position: relative;
-
-    top: auto;
-    right: auto;
-
-    width: calc(100% - 30px);
-
-    max-height: none;
-
-    margin: 20px auto;
-
-  }
-
-}
-
-
-@media (max-width: 600px) {
 
   body,
   button,
@@ -1825,8 +1514,197 @@ footer {
       cursive;
   }
 
+  .floating-gif {
+    max-width:
+      75px;
+
+    max-height:
+      75px;
+
+    opacity:
+      .65;
+  }
+
+  .site-header {
+    margin-top:
+      15px;
+  }
+
+  .post {
+    padding:
+      12px;
+  }
+
+  .music-player {
+    bottom:
+      8px;
+
+    gap:
+      7px;
+
+    width:
+      calc(100% - 20px);
+
+    padding:
+      8px 9px;
+  }
+
+  .disc {
+    font-size:
+      24px;
+  }
+
+  .track-info b {
+    font-size:
+      12px;
+  }
+
+  .track-info span {
+    font-size:
+      9px;
+  }
+
+  #playBtn {
+    width:
+      34px;
+
+    height:
+      34px;
+  }
+
+  .next-track {
+    display:
+      none;
+  }
+
   .sticky-notes-sidebar {
-    width: calc(100% - 20px);
+    width:
+      calc(100% - 20px);
+
+    margin:
+      20px auto;
+  }
+
+  .sticky-notes-container {
+    gap:
+      10px;
+
+    padding:
+      5px 3px 20px;
+  }
+
+  .sticky-note {
+    flex:
+      0 1
+      calc(50% - 5px);
+
+    min-height:
+      105px;
+
+    min-width:
+      120px;
+
+    padding:
+      25px 15px 15px;
+  }
+
+  .sticky-note-name {
+    font-size:
+      11px;
+  }
+
+  .sticky-note-text {
+    font-size:
+      11px;
+
+    line-height:
+      1.35;
+  }
+
+  .sticky-note-delete {
+    top:
+      7px;
+
+    right:
+      8px;
+  }
+
+  .live-post {
+    width:
+      calc(100% - 20px);
+
+    padding:
+      12px;
+  }
+
+  .live-stream {
+    flex-wrap:
+      wrap;
+
+    padding:
+      10px;
+  }
+
+  .live-info {
+    min-width:
+      calc(100% - 55px);
+  }
+
+  .live-status {
+    margin-left:
+      52px;
+  }
+
+  .live-button {
+    margin-left:
+      auto;
+  }
+
+}
+
+
+@media (max-width: 430px) {
+
+  .sticky-note {
+    flex:
+      0 1
+      100%;
+
+    min-height:
+      100px;
+  }
+
+  .live-stream {
+    align-items:
+      center;
+  }
+
+  .live-info strong {
+    font-size:
+      13px;
+  }
+
+  .live-info span {
+    font-size:
+      10px;
+  }
+
+  .live-button {
+    padding:
+      7px 9px;
+
+    font-size:
+      9px;
+  }
+
+  .music-player {
+    gap:
+      5px;
+  }
+
+  .equalizer {
+    display:
+      none;
   }
 
 }
