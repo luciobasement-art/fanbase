@@ -5,24 +5,56 @@
 
 
 /* =====================================================
+   SUPABASE
+   ===================================================== */
+
+const supabaseUrl =
+  "https://wzzdussogrbxkftviewi.supabase.co";
+
+
+const supabaseKey =
+  "sb_publishable_J_xHRzFAk546QMCWOkbL2Q_VB4Fpz34";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+  );
+
+
+/* =====================================================
    PANTALLA DE ENTRADA
    ===================================================== */
 
-const welcome = document.getElementById("welcome");
-const enterBtn = document.getElementById("enterBtn");
+const welcome =
+  document.getElementById("welcome");
+
+const enterBtn =
+  document.getElementById("enterBtn");
 
 
 /* =====================================================
    REPRODUCTOR DE MUSICA
    ===================================================== */
 
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const nextBtn = document.getElementById("nextBtn");
-const player = document.querySelector(".music-player");
+const audio =
+  document.getElementById("audio");
 
-const trackTitle = document.getElementById("trackTitle");
-const trackArtist = document.getElementById("trackArtist");
+const playBtn =
+  document.getElementById("playBtn");
+
+const nextBtn =
+  document.getElementById("nextBtn");
+
+const player =
+  document.querySelector(".music-player");
+
+const trackTitle =
+  document.getElementById("trackTitle");
+
+const trackArtist =
+  document.getElementById("trackArtist");
 
 
 /* =====================================================
@@ -87,19 +119,26 @@ function randomSong() {
     return;
   }
 
+
   let randomIndex;
+
 
   do {
 
     randomIndex =
-      Math.floor(Math.random() * songs.length);
+      Math.floor(
+        Math.random() * songs.length
+      );
 
   } while (
     songs.length > 1 &&
     randomIndex === currentSong
   );
 
-  currentSong = randomIndex;
+
+  currentSong =
+    randomIndex;
+
 
   loadSong(currentSong);
 
@@ -112,21 +151,36 @@ function randomSong() {
 
 function loadSong(index) {
 
-  const song = songs[index];
+  const song =
+    songs[index];
+
 
   if (!song) {
     return;
   }
 
-  audio.src = song.file;
+
+  audio.src =
+    song.file;
+
 
   audio.load();
 
-  trackTitle.textContent =
-    song.title;
 
-  trackArtist.textContent =
-    song.artist;
+  if (trackTitle) {
+
+    trackTitle.textContent =
+      song.title;
+
+  }
+
+
+  if (trackArtist) {
+
+    trackArtist.textContent =
+      song.artist;
+
+  }
 
 }
 
@@ -141,18 +195,27 @@ async function playMusic() {
 
     await audio.play();
 
-    playBtn.textContent = "❚❚";
 
-    player.classList.add("playing");
+    playBtn.textContent =
+      "❚❚";
 
-  } catch (error) {
+
+    player.classList.add(
+      "playing"
+    );
+
+  }
+
+  catch (error) {
 
     console.error(
       "No se pudo reproducir la canción:",
       error
     );
 
-    playBtn.textContent = "▶";
+
+    playBtn.textContent =
+      "▶";
 
   }
 
@@ -167,9 +230,14 @@ function pauseMusic() {
 
   audio.pause();
 
-  playBtn.textContent = "▶";
 
-  player.classList.remove("playing");
+  playBtn.textContent =
+    "▶";
+
+
+  player.classList.remove(
+    "playing"
+  );
 
 }
 
@@ -184,14 +252,17 @@ if (enterBtn) {
     "click",
     async () => {
 
-      welcome.style.display = "none";
+      welcome.style.display =
+        "none";
+
 
       /*
-         La primera canción se elige
-         ALEATORIAMENTE.
+         La canción inicial
+         es ALEATORIA.
       */
 
       randomSong();
+
 
       await playMusic();
 
@@ -215,7 +286,9 @@ if (playBtn) {
 
         await playMusic();
 
-      } else {
+      }
+
+      else {
 
         pauseMusic();
 
@@ -276,9 +349,14 @@ audio.addEventListener(
       audio.src
     );
 
-    playBtn.textContent = "▶";
 
-    player.classList.remove("playing");
+    playBtn.textContent =
+      "▶";
+
+
+    player.classList.remove(
+      "playing"
+    );
 
   }
 );
@@ -289,45 +367,86 @@ audio.addEventListener(
    ===================================================== */
 
 const addNoteBtn =
-  document.getElementById("addNoteBtn");
+  document.getElementById(
+    "addNoteBtn"
+  );
+
 
 const notesContainer =
-  document.getElementById("notesContainer");
+  document.getElementById(
+    "notesContainer"
+  );
+
 
 const noteNameInput =
-  document.getElementById("noteName");
+  document.getElementById(
+    "noteName"
+  );
+
 
 const noteTextInput =
-  document.getElementById("noteText");
+  document.getElementById(
+    "noteText"
+  );
+
 
 const toggleNotesBtn =
-  document.getElementById("toggleNotesBtn");
+  document.getElementById(
+    "toggleNotesBtn"
+  );
 
 
 /* =====================================================
-   CARGAR NOTAS
+   CARGAR NOTAS DESDE SUPABASE
    ===================================================== */
 
-function loadNotes() {
+async function loadNotes() {
 
   if (!notesContainer) {
     return;
   }
 
-  const notes =
-    JSON.parse(
-      localStorage.getItem("migueNotes") || "[]"
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+
+    .from("notes")
+
+    .select(
+      "id, name, text, created_at"
+    )
+
+    .order(
+      "created_at",
+      {
+        ascending: true
+      }
     );
 
-  notesContainer.innerHTML = "";
 
-  notes.forEach(
-    (note, index) => {
+  if (error) {
+
+    console.error(
+      "Error cargando las notas:",
+      error
+    );
+
+    return;
+
+  }
+
+
+  notesContainer.innerHTML =
+    "";
+
+
+  data.forEach(
+    (note) => {
 
       createNoteElement(
-        note.name,
-        note.text,
-        index
+        note
       );
 
     }
@@ -337,88 +456,142 @@ function loadNotes() {
 
 
 /* =====================================================
-   CREAR NOTA
+   CREAR ELEMENTO POST-IT
    ===================================================== */
 
-function createNoteElement(
-  name,
-  text,
-  index
-) {
+function createNoteElement(note) {
 
   const noteEl =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
-  noteEl.className = "sticky-note";
 
+  noteEl.className =
+    "sticky-note";
+
+
+  /*
+     BOTON ELIMINAR
+  */
 
   const deleteButton =
-    document.createElement("button");
+    document.createElement(
+      "button"
+    );
+
 
   deleteButton.className =
     "sticky-note-delete";
 
-  deleteButton.textContent = "✕";
+
+  deleteButton.textContent =
+    "✕";
+
 
   deleteButton.title =
     "Eliminar nota";
 
 
+  /*
+     NOMBRE
+  */
+
   const nameElement =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   nameElement.className =
     "sticky-note-name";
 
-  nameElement.textContent =
-    name || "Anónimo";
 
+  nameElement.textContent =
+    note.name ||
+    "Anónimo";
+
+
+  /*
+     TEXTO
+  */
 
   const textElement =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   textElement.className =
     "sticky-note-text";
 
+
   textElement.textContent =
-    text;
+    note.text;
 
 
-  noteEl.appendChild(deleteButton);
+  /*
+     ARMAR POST-IT
+  */
 
-  noteEl.appendChild(nameElement);
+  noteEl.appendChild(
+    deleteButton
+  );
 
-  noteEl.appendChild(textElement);
 
+  noteEl.appendChild(
+    nameElement
+  );
+
+
+  noteEl.appendChild(
+    textElement
+  );
+
+
+  /*
+     ELIMINAR
+  */
 
   deleteButton.addEventListener(
     "click",
-    () => {
+    async () => {
 
-      deleteNote(index);
+      await deleteNote(
+        note.id
+      );
 
     }
   );
 
 
-  notesContainer.appendChild(noteEl);
+  notesContainer.appendChild(
+    noteEl
+  );
 
 }
 
 
 /* =====================================================
-   GUARDAR NOTA
+   GUARDAR NOTA EN SUPABASE
    ===================================================== */
 
-function saveNote() {
+async function saveNote() {
 
-  if (!noteNameInput || !noteTextInput) {
+  if (
+    !noteNameInput ||
+    !noteTextInput
+  ) {
+
     return;
+
   }
+
 
   const name =
     noteNameInput.value.trim() ||
     "Anónimo";
+
 
   const text =
     noteTextInput.value.trim();
@@ -435,59 +608,103 @@ function saveNote() {
   }
 
 
-  const notes =
-    JSON.parse(
-      localStorage.getItem("migueNotes") || "[]"
+  /*
+     GUARDAMOS EN SUPABASE
+  */
+
+  const {
+    error
+  } = await supabaseClient
+
+    .from("notes")
+
+    .insert({
+
+      name: name,
+
+      text: text
+
+    });
+
+
+  if (error) {
+
+    console.error(
+      "Error guardando la nota:",
+      error
     );
 
 
-  notes.push({
-
-    name: name,
-
-    text: text
-
-  });
+    alert(
+      "No se pudo pegar la notita 😭"
+    );
 
 
-  localStorage.setItem(
-    "migueNotes",
-    JSON.stringify(notes)
-  );
+    return;
+
+  }
 
 
-  noteNameInput.value = "";
+  /*
+     Limpiar formulario
+  */
 
-  noteTextInput.value = "";
+  noteNameInput.value =
+    "";
 
 
-  loadNotes();
+  noteTextInput.value =
+    "";
+
+
+  /*
+     Volver a cargar las notas
+  */
+
+  await loadNotes();
 
 }
 
 
 /* =====================================================
-   ELIMINAR NOTA
+   ELIMINAR NOTA DE SUPABASE
    ===================================================== */
 
-function deleteNote(index) {
+async function deleteNote(id) {
 
-  const notes =
-    JSON.parse(
-      localStorage.getItem("migueNotes") || "[]"
+  if (!id) {
+    return;
+  }
+
+
+  const {
+    error
+  } = await supabaseClient
+
+    .from("notes")
+
+    .delete()
+
+    .eq(
+      "id",
+      id
     );
 
 
-  notes.splice(index, 1);
+  if (error) {
+
+    console.error(
+      "Error eliminando la nota:",
+      error
+    );
 
 
-  localStorage.setItem(
-    "migueNotes",
-    JSON.stringify(notes)
-  );
+    return;
+
+  }
 
 
-  loadNotes();
+  await loadNotes();
 
 }
 
@@ -542,35 +759,57 @@ if (toggleNotesBtn) {
     () => {
 
       const form =
-        document.querySelector(".note-form");
+        document.querySelector(
+          ".note-form"
+        );
+
 
       const hidden =
         notesContainer &&
-        notesContainer.style.display === "none";
+        notesContainer.style.display ===
+        "none";
 
 
       if (hidden) {
 
-        notesContainer.style.display = "";
+        notesContainer.style.display =
+          "";
+
 
         if (form) {
-          form.style.display = "";
+
+          form.style.display =
+            "";
+
         }
 
-        toggleNotesBtn.textContent = "−";
+
+        toggleNotesBtn.textContent =
+          "−";
+
 
         toggleNotesBtn.title =
           "Ocultar notas";
 
-      } else {
+      }
 
-        notesContainer.style.display = "none";
+      else {
+
+        notesContainer.style.display =
+          "none";
+
 
         if (form) {
-          form.style.display = "none";
+
+          form.style.display =
+            "none";
+
         }
 
-        toggleNotesBtn.textContent = "+";
+
+        toggleNotesBtn.textContent =
+          "+";
+
 
         toggleNotesBtn.title =
           "Mostrar notas";
@@ -581,6 +820,31 @@ if (toggleNotesBtn) {
   );
 
 }
+
+
+/* =====================================================
+   ACTUALIZACIONES EN TIEMPO REAL
+   ===================================================== */
+
+supabaseClient
+
+  .channel("notitas-fanbase")
+
+  .on(
+    "postgres_changes",
+    {
+      event: "*",
+      schema: "public",
+      table: "notes"
+    },
+    () => {
+
+      loadNotes();
+
+    }
+  )
+
+  .subscribe();
 
 
 /* =====================================================
