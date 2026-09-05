@@ -437,34 +437,26 @@ body {
 .live-post {
   width: min(650px, 94vw);
 
-  margin: 15px auto 22px;
+  margin:
+    15px auto 22px;
 
   padding: 15px;
 
   background:
-    rgba(12, 7, 18, .96);
+    rgba(12, 7, 18, .94);
 
   border:
     1px solid var(--pink);
 
   box-shadow:
-    0 0 25px rgba(110, 0, 160, .35);
+    0 0 25px
+    rgba(110, 0, 160, .25);
 
   backdrop-filter:
     blur(8px);
-
-  position: relative;
-
-  z-index: 5;
-
-  display: block;
 }
 
 .live-header {
-  display: block;
-
-  width: 100%;
-
   text-align: center;
 
   padding-bottom: 10px;
@@ -472,7 +464,8 @@ body {
   margin-bottom: 10px;
 
   border-bottom:
-    1px solid rgba(255,55,200,.45);
+    1px solid
+    rgba(255,55,200,.45);
 }
 
 .live-title {
@@ -483,8 +476,6 @@ body {
   font-weight: 1000;
 
   letter-spacing: 1px;
-
-  text-align: center;
 }
 
 .live-subtitle {
@@ -495,102 +486,51 @@ body {
   margin-top: 4px;
 
   text-transform: uppercase;
-
-  text-align: center;
 }
 
-
-/* =====================================================
-   CADA TRANSMISIÓN
-   ===================================================== */
-
 .live-stream {
-  display: flex !important;
+  display: flex;
 
-  flex-direction: row !important;
+  align-items: center;
 
-  align-items: center !important;
+  gap: 10px;
 
-  gap: 12px;
-
-  width: 100%;
-
-  min-height: 68px;
-
-  padding: 10px 12px;
+  padding: 11px;
 
   margin-top: 9px;
 
   background:
-    rgba(255,55,200,.09);
+    rgba(255,55,200,.07);
 
   border:
-    1px solid rgba(255,55,200,.40);
-
-  box-shadow:
-    inset 0 0 18px rgba(155,77,255,.06);
+    1px solid
+    rgba(255,55,200,.35);
 
   transition: .15s;
-
-  position: relative;
-
-  overflow: hidden;
-}
-
-.live-stream::before {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  top: 0;
-  bottom: 0;
-
-  width: 3px;
-
-  background:
-    linear-gradient(
-      var(--pink),
-      var(--purple)
-    );
-
-  box-shadow:
-    0 0 10px rgba(255,55,200,.8);
 }
 
 .live-stream:hover {
   border-color:
     var(--pink);
 
-  background:
-    rgba(255,55,200,.13);
-
   box-shadow:
-    0 0 15px rgba(255,55,200,.20);
+    0 0 15px
+    rgba(255,55,200,.2);
 
   transform:
     translateY(-1px);
 }
 
-
-/* =====================================================
-   CÍRCULO DE CADA PERSONA
-   ===================================================== */
-
 .live-avatar {
-  width: 42px !important;
+  width: 42px;
 
-  height: 42px !important;
+  height: 42px;
 
-  min-width: 42px !important;
-
-  max-width: 42px;
-
-  flex-shrink: 0;
+  min-width: 42px;
 
   border-radius: 50%;
 
-  display: grid !important;
+  display: grid;
 
   place-items: center;
 
@@ -606,33 +546,12 @@ body {
   font-weight: 1000;
 
   font-size: 16px;
-
-  text-align: center;
-
-  overflow: hidden;
-
-  border:
-    1px solid rgba(255,255,255,.25);
-
-  box-shadow:
-    0 0 12px rgba(255,55,200,.35);
 }
 
-
-/* =====================================================
-   INFORMACIÓN
-   ===================================================== */
-
 .live-info {
-  flex: 1 !important;
+  flex: 1;
 
-  min-width: 0 !important;
-
-  width: auto;
-
-  overflow: hidden;
-
-  display: block;
+  min-width: 0;
 }
 
 .live-info strong {
@@ -641,14 +560,6 @@ body {
   color: white;
 
   font-size: 14px;
-
-  line-height: 1.2;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
 }
 
 .live-info span {
@@ -658,19 +569,8 @@ body {
 
   font-size: 11px;
 
-  margin-top: 4px;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
+  margin-top: 3px;
 }
-
-
-/* =====================================================
-   EN VIVO
-   ===================================================== */
 
 .live-status {
   color: #ff4d76;
@@ -681,39 +581,14 @@ body {
 
   white-space: nowrap;
 
-  flex-shrink: 0;
-
-  padding:
-    4px 7px;
-
-  border:
-    1px solid rgba(255,77,118,.35);
-
-  background:
-    rgba(255,77,118,.08);
-
   animation:
     livePulse 1s infinite alternate;
 }
 
-
-/* =====================================================
-   BOTÓN VER LIVE
-   ===================================================== */
-
 .live-button {
-  display: inline-flex !important;
+  display: inline-block;
 
-  align-items: center;
-
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  padding:
-    8px 11px;
-
-  min-width: 82px;
+  padding: 8px 11px;
 
   background:
     var(--pink);
@@ -733,8 +608,6 @@ body {
     1px solid #ff8cdf;
 
   transition: .15s;
-
-  text-align: center;
 }
 
 .live-button:hover {
@@ -745,13 +618,9 @@ body {
     translateY(-1px);
 
   box-shadow:
-    0 0 12px rgba(255,55,200,.5);
+    0 0 12px
+    rgba(255,55,200,.5);
 }
-
-
-/* =====================================================
-   TEXTO DE ABAJO
-   ===================================================== */
 
 .live-note {
   text-align: center;
@@ -767,9 +636,9 @@ body {
   padding-top: 9px;
 
   border-top:
-    1px solid rgba(255,55,200,.25);
+    1px solid
+    rgba(255,55,200,.25);
 }
-
 
 @keyframes livePulse {
   from {
@@ -780,107 +649,6 @@ body {
     opacity: 1;
   }
 }
-
-
-/* =====================================================
-   TRANSMISIONES EN CELULAR
-   ===================================================== */
-
-@media (max-width: 700px) {
-
-  .live-post {
-    width:
-      calc(100% - 20px);
-
-    margin:
-      15px auto 22px;
-
-    padding:
-      12px;
-  }
-
-  .live-stream {
-    display: grid !important;
-
-    grid-template-columns:
-      42px minmax(0, 1fr);
-
-    gap:
-      9px;
-
-    align-items:
-      center !important;
-
-    padding:
-      10px;
-  }
-
-  .live-avatar {
-    grid-row:
-      span 3;
-  }
-
-  .live-info {
-    width:
-      100%;
-
-    min-width:
-      0 !important;
-  }
-
-  .live-info strong {
-    font-size:
-      13px;
-
-    white-space:
-      nowrap;
-  }
-
-  .live-info span {
-    font-size:
-      10px;
-
-    white-space:
-      nowrap;
-  }
-
-  .live-status {
-    margin:
-      0;
-
-    grid-column:
-      2;
-
-    width:
-      fit-content;
-
-    font-size:
-      9px;
-  }
-
-  .live-button {
-    grid-column:
-      2;
-
-    width:
-      fit-content;
-
-    margin-top:
-      2px;
-
-    padding:
-      8px 10px;
-  }
-
-  .live-note {
-    font-size:
-      8px;
-
-    line-height:
-      1.4;
-  }
-}
-
 
 /* =====================================================
    FEED
