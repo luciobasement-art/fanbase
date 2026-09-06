@@ -93,14 +93,19 @@ const songs = [
     file: "assets/music/man-down.mp3"
   },
 
-  {
+    {
     title: "Rude Boy",
     artist: "Rihanna",
     file: "assets/music/rude-boy.mp3"
+  },
+
+  {
+    title: "No Love Allowed",
+    artist: "Rihanna",
+    file: "assets/music/Rihanna-No-Love-Allowed.mp3"
   }
 
 ];
-
 
 /* =====================================================
    CANCION ACTUAL
